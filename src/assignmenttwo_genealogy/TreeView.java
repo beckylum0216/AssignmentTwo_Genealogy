@@ -39,11 +39,19 @@ public class TreeView {
         {
             Leaf drawNode = (Leaf) graphPair.getValue();
             LeafView graphNode = new LeafView(drawNode);
+            
+            double positionX = newPane.widthProperty().divide(2.0).doubleValue();
+            
+            
+            
+            
             graphNode.GetLeafView().relocate(0, 0);
             activeView.put(graphNode.GetPersonID(), graphNode);
             newPane.getChildren().add(graphNode.GetLeafView());
             
         }
+        
+       
         
         // add spouse edges
         for(Map.Entry edgePair: activeView.entrySet())
@@ -60,6 +68,8 @@ public class TreeView {
                 }
             }
         }
+        
+        
         
         
         
