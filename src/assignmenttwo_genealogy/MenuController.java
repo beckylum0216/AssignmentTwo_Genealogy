@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -19,14 +20,16 @@ import javafx.scene.layout.StackPane;
  */
 public class MenuController implements EventHandler<ActionEvent> {
     
+    Scene menuScene;
     GridPane menuPane;
     StackPane subPane;
-    TreeManager familyTree;
+    
     ArrayList<Button> menuButtons;
     
-    MenuController()
+    MenuController(Scene inputScene, GridPane inputPane)
     {
-        this.familyTree = new TreeManager();
+        this.menuScene = inputScene;
+        this.menuPane = inputPane;
         this.menuButtons = new ArrayList<>();
         this.subPane = new StackPane();
     }
@@ -48,11 +51,14 @@ public class MenuController implements EventHandler<ActionEvent> {
         Button inputButton = (Button) event.getSource();
         if (inputButton.getId().equals(menuButtons.get(0).getId()))
         {
-            InputView inputForm = new InputView(familyTree);
+            InputView inputForm = new InputView();
+            menuPane.getChildren().remove(subPane);
             subPane.getChildren().clear();
             subPane.getChildren().add(inputForm.SetInputPane());
-            menuPane.getChildren().remove(subPane);
+            //subPane.setStyle("-fx-background-color: blue;");
+            subPane.prefWidthProperty().bind(this.menuScene.widthProperty().multiply(0.7));
             menuPane.add(subPane, 1, 0);
+            
         }
         else if(inputButton.getId().equals(menuButtons.get(1).getId()))
         {
@@ -67,16 +73,19 @@ public class MenuController implements EventHandler<ActionEvent> {
         }
         else if(inputButton.getId().equals(menuButtons.get(3).getId()))
         {
-            EditView editForm = new EditView(familyTree);
+            EditView editForm = new EditView();
             
         }
-        else if(inputButton.getId().equals(menuButtons.get(3).getId()))
+        else if(inputButton.getId().equals(menuButtons.get(4).getId()))
         {
-            TreeView treeForm = new TreeView(familyTree);
+            TreeView treeForm = new TreeView();
+            menuPane.getChildren().remove(subPane);
             subPane.getChildren().clear();
             subPane.getChildren().add(treeForm.SetTreePane());
-            menuPane.getChildren().remove(subPane);
+            //subPane.setStyle("-fx-background-color: green;");
+            subPane.prefWidthProperty().bind(this.menuScene.widthProperty().multiply(0.7));
             menuPane.add(subPane, 1, 0);
+            
         }
         
     }

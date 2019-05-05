@@ -22,11 +22,11 @@ import javafx.stage.Stage;
  */
 public class EditView 
 {
-    TreeManager familyTree;
     
-    public EditView(TreeManager inputGraph)
+    
+    public EditView()
     {
-        this.familyTree = inputGraph;
+        
     }
             
     public GridPane SetEditPane()
@@ -73,7 +73,7 @@ public class EditView
         
         Button submitButton = new Button("Edit");
         submitButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        InputController inputHandle = new InputController(this.familyTree, inputFields);
+        InputController inputHandle = new InputController(inputFields);
         submitButton.setOnAction(click ->inputHandle.handle(click));
         newPane.add(submitButton, 1, 14, 2, 1);
         

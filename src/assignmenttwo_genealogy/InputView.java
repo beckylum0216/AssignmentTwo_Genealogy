@@ -24,11 +24,11 @@ import javafx.stage.Stage;
  */
 public class InputView 
 {
-    TreeManager familyTree;
     
-    InputView(TreeManager inputTree)
+    
+    InputView()
     {
-        this.familyTree = inputTree;
+        
     }
     
     public GridPane SetInputPane()
@@ -74,10 +74,9 @@ public class InputView
         
         Button submitButton = new Button("Submit");
         submitButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        InputController inputHandle = new InputController(this.familyTree, inputFields);
+        InputController inputHandle = new InputController(inputFields);
         submitButton.setOnAction(click ->inputHandle.handle(click));
         newPane.add(submitButton, 1, 14, 2, 1);
-        
         
         return newPane;
     }

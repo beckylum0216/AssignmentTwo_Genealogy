@@ -33,6 +33,12 @@ public class MenuView extends Application {
     Scene menuScene;
    
     
+    @Override
+    public void init()
+    {
+        TreeManager.GetInstance();
+    }
+    
     //https://stackoverflow.com/questions/30679025/graph-visualisation-like-yfiles-in-javafx
     @Override
     public void start(Stage inputStage)
@@ -40,7 +46,7 @@ public class MenuView extends Application {
         
         this.newPane = new GridPane();
         this.menuScene = new Scene(newPane, 1280, 1024);
-        this.menuHandler = new MenuController();
+        this.menuHandler = new MenuController(this.menuScene, this.newPane);
         this.SetGridPane();
         this.SetButtonEvent();
         

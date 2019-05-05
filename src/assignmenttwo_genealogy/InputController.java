@@ -21,11 +21,10 @@ import javafx.stage.Stage;
 public class InputController implements EventHandler<ActionEvent>
 {
     TextField[] detailsField;
-    TreeManager familyTree;
     
-    public InputController(TreeManager inputTree,  TextField[] inputField)
+    public InputController(TextField[] inputField)
     {
-        this.familyTree = inputTree;
+       
         this.detailsField = inputField;
     }
     
@@ -46,8 +45,9 @@ public class InputController implements EventHandler<ActionEvent>
         tempNode.SetParentOne(detailsField[10].getText());
         tempNode.SetParentTwo(detailsField[11].getText());
         tempNode.SetPersonSpouse(detailsField[12].getText());
-        this.familyTree.AddeNode(tempNode);
-        this.familyTree.PeekNode(tempNode.GetPersonID()).PrintNode();
+        TreeManager.GetInstance().AddNode(tempNode);
+        //TreeManager.GetInstance().PeekNode(tempNode).PrintNode();
+        
     }
     
     

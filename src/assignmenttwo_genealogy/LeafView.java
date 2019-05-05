@@ -5,7 +5,12 @@
  */
 package assignmenttwo_genealogy;
 
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -18,23 +23,46 @@ import javafx.scene.text.Text;
  */
 public class LeafView extends Leaf {
     
+    private Vector2 leafPosition;
+    private float mod;
+    Label leafLabel;
+    
     LeafView(Leaf inputNode)
     {
-        super(inputNode);        
+        super(inputNode);
+        this.leafPosition = new Vector2(0,0);
+        this.mod = 0;
+        this.leafLabel = new Label(inputNode.GetFirstName()+" "+ inputNode.GetLastNameBirth());
+        BackgroundFill nodeFill = new BackgroundFill(Color.web("92E4F0"), CornerRadii.EMPTY, Insets.EMPTY);
+        Background nodeBackground = new Background(nodeFill);
+        this.leafLabel.setBackground(nodeBackground);
+        this.leafLabel.setMinWidth(50);
+        this.leafLabel.setMinHeight(25);
     }
     
-    public StackPane GetLeafView()
+    public void SetLeafPosition(Vector2 inputPosition)
     {
-        Rectangle nodeCell = new Rectangle(150,50);
-        nodeCell.setFill(Color.web("92E4F0"));
-        StackPane infoPane = new StackPane();
-        Text infoName = new Text();
-        infoName.setText(this.GetFirstName()+" "+this.GetLastNameBirth());
-        infoPane.getChildren().add(nodeCell);
-        infoPane.getChildren().add(infoName);
-        
-        return infoPane;
+        this.leafPosition = inputPosition;
     }
+    
+    public Vector2 GetLeafPosition()
+    {
+        return this.leafPosition;
+    }
+    
+    public void AddLeafView()
+    {
+        leafLabel = new Label(this.GetFirstName()+" "+ this.GetLastNameBirth());
+        BackgroundFill nodeFill = new BackgroundFill(Color.web("92E4F0"), CornerRadii.EMPTY, Insets.EMPTY);
+        Background nodeBackground = new Background(nodeFill);
+        leafLabel.setBackground(nodeBackground);
+    }
+    
+    public Label GetLeafView()
+    {
+        return leafLabel;
+    }
+    
     
     
     

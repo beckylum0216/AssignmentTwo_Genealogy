@@ -149,13 +149,16 @@ public class Leaf {
         System.out.println("Person ID: " + this.personID);
         System.out.println("First Name: " + this.firstName);
         System.out.println("Last Name: " + this.lastNameBirth);
-        System.out.println("Last Name Marraige: " + this.lastNameMarriage);
+        System.out.println("Last Name Marriage: " + this.lastNameMarriage);
         System.out.println("Gender: " + this.personGender);
         System.out.println("Street: " + this.personAddress.street);
         System.out.println("Country: " + this.personAddress.country);
         System.out.println("State: "+ this.personAddress.state);
         System.out.println("Postcode: " + this.personAddress.postcode);
-        
+        System.out.println("Blurb: " + this.personBlurb);
+        System.out.println("ParentOne: " + this.parentOne);
+        System.out.println("ParentTwo: " + this.parentTwo);
+        System.out.println("Spouse: " + this.personSpouse);
     }
     
 }
