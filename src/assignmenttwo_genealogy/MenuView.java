@@ -28,7 +28,7 @@ public class MenuView extends Application {
     
     GridPane newPane;
     MenuController menuHandler;
-    String[] bText = {"New", "Open", "Save", "Edit", "View"};
+    String[] bText = {"New", "Load", "Save", "Edit", "View"};
     Button[] menuButtons = new Button[bText.length];
     Scene menuScene;
    
@@ -73,7 +73,7 @@ public class MenuView extends Application {
         }
         
         //vMenu.setStyle("-fx-background-color: white;");
-        vMenu.prefWidthProperty().bind(this.menuScene.widthProperty().multiply(0.3));
+        vMenu.prefWidthProperty().bind(this.menuScene.widthProperty().multiply(0.4));
         return vMenu;
         
     }

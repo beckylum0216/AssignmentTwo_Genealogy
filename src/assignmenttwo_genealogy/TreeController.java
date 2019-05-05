@@ -36,6 +36,7 @@ public class TreeController
      * @see https://www.geeksforgeeks.org/level-node-tree-source-node-using-bfs/
      * @param root starting node
      */
+    /*
     private void SetPositionY()
     {
         Queue <LeafView> nodeQueue = new LinkedList<>();
@@ -89,6 +90,64 @@ public class TreeController
             Integer tempLevel = (Integer) tempPair.getValue();
             
             System.out.println("node: "+ tempKey + " " + tempLevel);
+        }
+        
+        
+    }
+    */
+    
+    private void SetPositionY()
+    {
+        Queue <LeafView> nodeQueue = new LinkedList<>();
+        HashMap<String, Boolean> nodeFlags = new HashMap<>();
+        HashMap<String, Integer> nodeLevel = new HashMap<>();
+        
+        Leaf root = TreeManager.GetInstance().GetRootNode();
+        LeafView rootView = new LeafView(root);
+        
+        nodeQueue.add(rootView);
+        
+        nodeFlags.put(rootView.GetPersonID(), Boolean.TRUE);
+        nodeLevel.put(rootView.GetPersonID(), 0);
+        int tempLevel = nodeLevel.get(rootView.GetPersonID());
+        this.familyTree.get(rootView.GetParentOne()).get(this.GetIndex(rootView)).GetLeafPosition().SetY(tempLevel);
+        
+        
+        while(!nodeQueue.isEmpty())
+        {
+            LeafView targetNode = rootView;
+            nodeQueue.poll();
+
+            for(Map.Entry adjPair : this.familyTree.entrySet())
+            {
+                String adjKey = (String) adjPair.getKey();
+                ArrayList<LeafView> adjList = (ArrayList<LeafView>) adjPair.getValue();
+
+                for(int ii = 0; ii < adjList.size(); ii += 1)
+                {
+                    if(!nodeFlags.containsKey(adjList.get(ii).GetPersonID()))
+                    {
+                        nodeQueue.add(adjList.get(ii));
+                        nodeFlags.put(adjList.get(ii).GetPersonID(), Boolean.TRUE);
+                        nodeLevel.put(adjList.get(ii).GetPersonID(), nodeLevel.get(targetNode.GetPersonID())+1);
+                        tempLevel = nodeLevel.get(adjList.get(ii).GetPersonID());
+                        this.familyTree.get(adjList.get(ii).GetParentOne()).get(this.GetIndex(adjList.get(ii))).GetLeafPosition().SetY(tempLevel);
+                        //targetNode = this.familyTree.get(adjList.get(ii).GetParentOne());
+                        
+                    }
+                }
+                
+                
+            }
+           
+        }
+        
+        for(Map.Entry tempPair:nodeLevel.entrySet())
+        {
+            String tempKey = (String)tempPair.getKey();
+            Integer testLevel = (Integer) tempPair.getValue();
+            
+            System.out.println("node: "+ tempKey + " " + testLevel);
         }
         
         

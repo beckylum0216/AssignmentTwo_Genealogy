@@ -14,56 +14,37 @@ import java.util.HashMap;
  */
 public class TreeManager {
     
-    private static TreeManager treeDB = new TreeManager();
     
-    HashMap<String, ArrayList<Leaf>> familyTree;
     
-    private TreeManager()
+    HashMap<String, Leaf> familyTree;
+    
+    public TreeManager()
     {
         System.out.println("Running Tree Manager constructor...");
         familyTree = new HashMap<>();
         Leaf root = GetRootNode();
-        ArrayList <Leaf> rootList = new ArrayList<>();
-        rootList.add(root);
-        familyTree.put(root.GetParentOne(), rootList);
+        familyTree.put(root.GetPersonID(), root);
         System.out.println("Tree manager size: " + this.familyTree.size());
     }
     
-    
-    public static TreeManager GetInstance()
-    {
-        
-        return treeDB;
-    }
-    
-    public void SetFamilyTree(HashMap<String, ArrayList<Leaf>> inputTree)
+    public void SetFamilyTree(HashMap<String, Leaf> inputTree)
     {
         this.familyTree = inputTree;
     }
     
-    public HashMap<String, ArrayList<Leaf>> GetFamilyTree()
+    public HashMap<String, Leaf> GetFamilyTree()
     {
         return this.familyTree;
     }
     
     public void AddNode(Leaf inputNode)
     {
-        if(this.familyTree.containsKey(inputNode.GetParentOne()))
-        {
-            this.familyTree.get(inputNode.GetParentOne()).add(inputNode);
-        }
-        else
-        {
-            ArrayList <Leaf> inputList = new ArrayList<>();
-            inputList.add(inputNode);
-            this.familyTree.put(inputNode.GetParentOne(), inputList);
-        }
-        
+        this.familyTree.put(inputNode.GetPersonID(), inputNode);        
     }
     
     public Leaf PeekNode(Leaf inputNode)
     {
-        return this.familyTree.get(inputNode.GetParentOne()).get(this.familyTree.get(inputNode.GetParentOne()).indexOf(inputNode));
+        return this.familyTree.get(inputNode.GetPersonID());
     }
     
     public Leaf GetRootNode()
@@ -87,5 +68,7 @@ public class TreeManager {
         
         return root;
     }
+    
+    
     
 }

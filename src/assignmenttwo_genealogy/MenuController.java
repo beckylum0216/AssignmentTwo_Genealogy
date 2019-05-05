@@ -56,7 +56,7 @@ public class MenuController implements EventHandler<ActionEvent> {
             subPane.getChildren().clear();
             subPane.getChildren().add(inputForm.SetInputPane());
             //subPane.setStyle("-fx-background-color: blue;");
-            subPane.prefWidthProperty().bind(this.menuScene.widthProperty().multiply(0.7));
+            subPane.prefWidthProperty().bind(this.menuScene.widthProperty().multiply(0.6));
             menuPane.add(subPane, 1, 0);
             
         }
@@ -74,7 +74,12 @@ public class MenuController implements EventHandler<ActionEvent> {
         else if(inputButton.getId().equals(menuButtons.get(3).getId()))
         {
             EditView editForm = new EditView();
-            
+            menuPane.getChildren().remove(subPane);
+            subPane.getChildren().clear();
+            subPane.getChildren().add(editForm.SetEditPane());
+            //subPane.setStyle("-fx-background-color: green;");
+            subPane.prefWidthProperty().bind(this.menuScene.widthProperty().multiply(0.6));
+            menuPane.add(subPane, 1, 0);
         }
         else if(inputButton.getId().equals(menuButtons.get(4).getId()))
         {
@@ -83,7 +88,7 @@ public class MenuController implements EventHandler<ActionEvent> {
             subPane.getChildren().clear();
             subPane.getChildren().add(treeForm.SetTreePane());
             //subPane.setStyle("-fx-background-color: green;");
-            subPane.prefWidthProperty().bind(this.menuScene.widthProperty().multiply(0.7));
+            subPane.prefWidthProperty().bind(this.menuScene.widthProperty().multiply(0.6));
             menuPane.add(subPane, 1, 0);
             
         }

@@ -71,12 +71,38 @@ public class EditView
             newPane.add(inputFields[ii], 1, ii);
         }
         
-        Button submitButton = new Button("Edit");
-        submitButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        InputController inputHandle = new InputController(inputFields);
-        submitButton.setOnAction(click ->inputHandle.handle(click));
-        newPane.add(submitButton, 1, 14, 2, 1);
+        EditController editHandle = new EditController();
+        Button editButton = new Button("Edit");
+        editButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         
+        editButton.setOnAction(click ->editHandle.handle(click));
+        newPane.add(editButton, 1, 14, 2, 1);
+        
+        GridPane subPane = new GridPane();
+        subPane.setHgap(10);
+        subPane.setGridLinesVisible(false);
+        int numberOfSubColumns = 2;
+        for(int ii = 0; ii < numberOfColumns; ii += 1)
+        {
+            ColumnConstraints newColumn = new ColumnConstraints();
+            newColumn.setPercentWidth(100.0/numberOfSubColumns);
+            subPane.getColumnConstraints().add(newColumn);
+        }
+        
+        
+        Button previousButton = new Button("Previous");
+        previousButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        previousButton.setOnAction(click ->editHandle.handle(click));
+        
+        Button nextButton = new Button("Next");
+        nextButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        nextButton.setOnAction(click ->editHandle.handle(click));
+        
+        subPane.add(previousButton, 0, 0);
+        subPane.add(nextButton, 1, 0);
+        
+        
+        newPane.add(subPane, 1, 15, 2, 1);
         
         return newPane;
     }
