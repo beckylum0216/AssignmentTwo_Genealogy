@@ -6,9 +6,14 @@
 package assignmenttwo_genealogy;
 
 import java.util.ArrayList;
+import java.util.Map;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -20,7 +25,7 @@ import javafx.stage.Stage;
  *
  * @author becky
  */
-public class EditView 
+public class EditView implements EventHandler<ActionEvent>
 {
     
     
@@ -71,42 +76,34 @@ public class EditView
             newPane.add(inputFields[ii], 1, ii);
         }
         
-        EditController editHandle = new EditController();
         Button editButton = new Button("Edit");
         editButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         
-        editButton.setOnAction(click ->editHandle.handle(click));
+        editButton.setOnAction(click ->handle(click));
         newPane.add(editButton, 1, 14, 2, 1);
         
-        GridPane subPane = new GridPane();
-        subPane.setHgap(10);
-        subPane.setGridLinesVisible(false);
-        int numberOfSubColumns = 2;
-        for(int ii = 0; ii < numberOfColumns; ii += 1)
-        {
-            ColumnConstraints newColumn = new ColumnConstraints();
-            newColumn.setPercentWidth(100.0/numberOfSubColumns);
-            subPane.getColumnConstraints().add(newColumn);
-        }
-        
-        
-        Button previousButton = new Button("Previous");
-        previousButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        previousButton.setOnAction(click ->editHandle.handle(click));
-        
-        Button nextButton = new Button("Next");
-        nextButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        nextButton.setOnAction(click ->editHandle.handle(click));
-        
-        subPane.add(previousButton, 0, 0);
-        subPane.add(nextButton, 1, 0);
-        
-        
-        newPane.add(subPane, 1, 15, 2, 1);
         
         return newPane;
     }
     
+    @Override
+    public void handle(ActionEvent event) {
+        Button inputButton = (Button) event.getSource();
+       
+        if (inputButton.getText().equals("Edit"))
+        {
+            System.out.println("Edit");
+            
+        }
+        else if(inputButton.getText().equals("Previous"))
+        {
+            System.out.println("Select previous");
+        }
+        else if(inputButton.getText().equals("Next"))
+        {
+            System.out.println("Select Next");
+        }
+    }
     
     
     

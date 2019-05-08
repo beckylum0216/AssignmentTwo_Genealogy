@@ -5,8 +5,8 @@
  */
 package assignmenttwo_genealogy;
 
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -22,16 +22,17 @@ import javafx.scene.layout.VBox;
  *
  * @author becky
  */
-public class LoadView implements EventHandler<ActionEvent>{
+public class SaveView implements EventHandler<ActionEvent>{
     
     private TextField inputField;
     private StackPane loadPane;
     private StackPane parentPane;
-    private ApplicationController appControl;
+    private ApplicationController appControl; 
+
     
-    LoadView(StackPane targetPane)
+    SaveView(StackPane targetPane)
     {
-        this.appControl = new ApplicationController();
+        appControl = new ApplicationController();
         this.parentPane = targetPane;
         loadPane = new StackPane();
         VBox loadBox = SetVBox();
@@ -71,15 +72,14 @@ public class LoadView implements EventHandler<ActionEvent>{
         
         try
         {
-            FileInputStream inputFile = new FileInputStream(filePath);
-            ObjectInputStream inputObject = new ObjectInputStream(inputFile);
+            FileOutputStream outputFile = new FileOutputStream(filePath);
+            ObjectOutputStream outputObject  = new ObjectOutputStream(outputFile);
             
-            appControl.SetTreeDB((GraphDatabase) inputObject.readObject());
+            outputObject.writeObject(appControl.GetTreeDB());
+            outputObject.close();
+            outputFile.close();
             
-            inputFile.close();
-            inputObject.close();
-            
-            System.out.println("TreeDB deserialised!!!");
+            System.out.println("Serialisation run successful!!!");
             
         }
         catch(Exception e)

@@ -5,11 +5,13 @@
  */
 package assignmenttwo_genealogy;
 
+import java.io.Serializable;
+
 /**
  *
  * @author becky
  */
-public class Address {
+public class Address implements Serializable{
     public String street;
     public String country;
     public String state;

@@ -5,160 +5,123 @@
  */
 package assignmenttwo_genealogy;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author becky
  */
-
 public class Leaf {
-    private String personID;
+    
+    private String nodeID;
     private String firstName;
-    private String lastNameBirth;
-    private String lastNameMarriage;
-    private String personGender;
-    private Address personAddress;
-    private String personBlurb;
-    private String parentOne;
-    private String parentTwo;
-    private String personSpouse;
+    private String lastName;
+    private int generation;
+    private ArrayList<Leaf> children;
     
     
-    
-    Leaf()
+    Leaf(Nodi inputNode)
     {
-        personAddress = new Address();
+        this.nodeID = inputNode.GetPersonID();
+        this.firstName = inputNode.GetFirstName();
+        this.lastName = inputNode.GetLastNameBirth();
+        //this.siblings = new ArrayList<>();
+        this.generation = 0;
+        this.children = new ArrayList<>();
     }
     
-    Leaf(Leaf inputNode)
+    Leaf(Leaf inputLeaf)
     {
-        this.personID = inputNode.personID;
-        this.firstName = inputNode.firstName;
-        this.lastNameBirth = inputNode.lastNameBirth;
-        this.lastNameMarriage = inputNode.lastNameMarriage;
-        this.personGender = inputNode.personGender;
-        this.personAddress = inputNode.personAddress;
-        this.personBlurb = inputNode.personBlurb;
-        this.parentOne = inputNode.parentOne;
-        this.parentTwo = inputNode.parentTwo;
-        this.personSpouse = inputNode.personSpouse;
+        this.nodeID = inputLeaf.GetNodeID();
+        this.firstName = inputLeaf.GetFirstName();
+        this.lastName = inputLeaf.GetLastName();
+        this.generation = 0;
+        //this.siblings = new ArrayList<>();
+        this.children = new ArrayList<>();
+    }
+    
+    public void SetNodeID(String inputID)
+    {
+        this.nodeID = inputID;
+    }
+    
+    public String GetNodeID()
+    {
+        return this.nodeID;
+    }
+    
+    public void SetFirstName(String inputFirstName)
+    {
+        this.firstName = inputFirstName;
+    }
+    
+    public String GetFirstName()
+    {
+        return this.firstName;
+    }
+    
+    public void SetLastName(String inputLastName)
+    {
+        this.lastName = inputLastName;
+    }
+    
+    public String GetLastName()
+    {
+        return this.lastName;
+    }
+    
+    public void SetGeneration(int inputGeneration)
+    {
+        this.generation = inputGeneration;
+    }
+    
+    public int GetGeneration()
+    {
+        return this.generation;
+    }
+    
+    /*
+    public void SetSiblings(ArrayList<String> inputSiblings)
+    {
+        this.siblings = inputSiblings;
+    }
+    
+    public ArrayList<String> GetSiblings()
+    {
+        return this.siblings;
+    }
+    */
+    
+    public void AddChild(Leaf inputChild)
+    {
+        this.children.add(inputChild);
+    }
+    
+    public void SetChildren(ArrayList<Leaf> inputChildren)
+    {
+        this.children = inputChildren;
+    }
+    
+    public ArrayList<Leaf> GetChildren()
+    {
+        return this.children;
+    }
+    
+    public Leaf GetChild(String inputID)
+    {
+        for(int ii = 0; ii < this.children.size(); ii += 1)
+        {
+            if(this.children.get(ii).nodeID.equals(inputID))
+            {
+                return this.children.get(ii);
+            }
+            
+        }
+        
+        return null;
     }
     
     
-     public void SetPersonID(String inputID)
-     {
-         this.personID = inputID;
-     }
-     
-     public String GetPersonID()
-     {
-         return this.personID;
-     }
-     
-     public void SetFirstName(String inputFirstName)
-     {
-         this.firstName = inputFirstName;
-     }
-     
-     public String GetFirstName()
-     {
-         return this.firstName;
-     }
-     
-     public void SetLastNameBirth(String inputLastName)
-     {
-         this.lastNameBirth = inputLastName;
-     }
-     
-     public String GetLastNameBirth()
-     {
-         return this.lastNameBirth;
-     }
-     
-     
-    public void SetLastNameMarraige(String inputLastName)
-    {
-        this.lastNameMarriage = inputLastName;
-    }
-    
-    public String GetLastNameMarraige()
-    {
-        return this.lastNameMarriage;
-    }
-    
-    public void SetPersonGender(String inputGender)
-    {
-        this.personGender = inputGender;
-    }
-    
-    public String GetPersonGender()
-    {
-        return this.personGender;
-    }
-    
-    public void SetPersonAddress(Address inputAddress)
-    {
-        this.personAddress = inputAddress;
-    }
-    
-    public Address GetPersonAddress()
-    {
-        return this.personAddress;
-    }
-    
-    public void SetPersonBlurb(String inputBlurb)
-    {
-        this.personBlurb = inputBlurb;
-    }
-    public String GetPersonBlurb()
-    {
-        return this.personBlurb;
-    }
-    
-    public void SetParentOne(String inputParent)
-    {
-        this.parentOne = inputParent;
-    }
-    
-    public String GetParentOne()
-    {
-        return this.parentOne;
-    }
-    
-    public void SetParentTwo(String inputParent)
-    {
-        this.parentTwo = inputParent;
-    }
-    
-    public String GetParentTwo()
-    {
-        return this.parentTwo;
-    }
-    
-    public void SetPersonSpouse(String inputSpouse)
-    {
-        this.personSpouse = inputSpouse;
-    }
-    
-    public String GetPersonSpouse()
-    {
-        return this.personSpouse;
-    }
-    
-    public void PrintNode()
-    {
-        System.out.println("Person ID: " + this.personID);
-        System.out.println("First Name: " + this.firstName);
-        System.out.println("Last Name: " + this.lastNameBirth);
-        System.out.println("Last Name Marriage: " + this.lastNameMarriage);
-        System.out.println("Gender: " + this.personGender);
-        System.out.println("Street: " + this.personAddress.street);
-        System.out.println("Country: " + this.personAddress.country);
-        System.out.println("State: "+ this.personAddress.state);
-        System.out.println("Postcode: " + this.personAddress.postcode);
-        System.out.println("Blurb: " + this.personBlurb);
-        System.out.println("ParentOne: " + this.parentOne);
-        System.out.println("ParentTwo: " + this.parentTwo);
-        System.out.println("Spouse: " + this.personSpouse);
-    }
+            
     
 }

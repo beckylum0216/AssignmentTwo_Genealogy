@@ -17,7 +17,10 @@ import javafx.stage.Stage;
  *
  * @author becky
  */
+
+
 public class AssignmentTwo_Genealogy extends Application {
+    
     
     
     @Override

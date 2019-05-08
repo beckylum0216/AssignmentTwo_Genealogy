@@ -22,9 +22,10 @@ import javafx.stage.Stage;
  *
  * @author becky
  */
-public class InputView 
+public class InputView implements EventHandler<ActionEvent>
 {
-    
+    int numOfFields = 13;
+    TextField[] inputFields = new TextField[numOfFields];
     
     InputView()
     {
@@ -34,8 +35,8 @@ public class InputView
     public GridPane SetInputPane()
     {
         
-        int numOfFields = 13;
-        TextField[] inputFields = new TextField[numOfFields];
+        
+        
         
         
         GridPane newPane = new GridPane();
@@ -74,13 +75,35 @@ public class InputView
         
         Button submitButton = new Button("Submit");
         submitButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        InputController inputHandle = new InputController(inputFields);
-        submitButton.setOnAction(click ->inputHandle.handle(click));
+        
+        submitButton.setOnAction(click ->handle(click));
         newPane.add(submitButton, 1, 14, 2, 1);
         
         return newPane;
     }
     
+    @Override
+    public void handle(ActionEvent event) 
+    {
+        Nodi tempNode = new Nodi();
+        tempNode.SetPersonID(inputFields[0].getText());
+        tempNode.SetFirstName(inputFields[1].getText());
+        tempNode.SetLastNameBirth(inputFields[2].getText());
+        tempNode.SetLastNameMarraige(inputFields[3].getText());
+        tempNode.SetPersonGender(inputFields[4].getText());
+        tempNode.GetPersonAddress().street = inputFields[5].getText();
+        tempNode.GetPersonAddress().country = inputFields[6].getText();
+        tempNode.GetPersonAddress().state = inputFields[7].getText();
+        tempNode.GetPersonAddress().postcode = Integer.parseInt(inputFields[8].getText());
+        tempNode.SetPersonBlurb(inputFields[9].getText());
+        tempNode.SetParentOne(inputFields[10].getText());
+        tempNode.SetParentTwo(inputFields[11].getText());
+        tempNode.SetPersonSpouse(inputFields[12].getText());
+        ApplicationController appControl = new ApplicationController();
+        appControl.GetTreeDB().AddNode(tempNode);
+        appControl.GetTreeDB().PeekNode(tempNode).PrintNode();
+        
+    }
     
     
 }

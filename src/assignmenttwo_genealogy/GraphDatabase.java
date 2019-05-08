@@ -5,6 +5,7 @@
  */
 package assignmenttwo_genealogy;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,44 +13,44 @@ import java.util.HashMap;
  *
  * @author becky
  */
-public class TreeManager {
+public class GraphDatabase implements Serializable{
     
     
     
-    HashMap<String, Leaf> familyTree;
+    HashMap<String, Nodi> familyTree;
     
-    public TreeManager()
+    public GraphDatabase()
     {
         System.out.println("Running Tree Manager constructor...");
         familyTree = new HashMap<>();
-        Leaf root = GetRootNode();
+        Nodi root = GetRootNode();
         familyTree.put(root.GetPersonID(), root);
         System.out.println("Tree manager size: " + this.familyTree.size());
     }
     
-    public void SetFamilyTree(HashMap<String, Leaf> inputTree)
+    public void SetFamilyTree(HashMap<String, Nodi> inputTree)
     {
         this.familyTree = inputTree;
     }
     
-    public HashMap<String, Leaf> GetFamilyTree()
+    public HashMap<String, Nodi> GetFamilyTree()
     {
         return this.familyTree;
     }
     
-    public void AddNode(Leaf inputNode)
+    public void AddNode(Nodi inputNode)
     {
         this.familyTree.put(inputNode.GetPersonID(), inputNode);        
     }
     
-    public Leaf PeekNode(Leaf inputNode)
+    public Nodi PeekNode(Nodi inputNode)
     {
         return this.familyTree.get(inputNode.GetPersonID());
     }
     
-    public Leaf GetRootNode()
+    public Nodi GetRootNode()
     {
-        Leaf root = new Leaf();
+        Nodi root = new Nodi();
         root.SetPersonID("root001");
         root.SetFirstName("root");
         root.SetLastNameBirth("root");

@@ -7,6 +7,8 @@ package assignmenttwo_genealogy;
 
 import java.lang.reflect.Method;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -24,10 +26,10 @@ import javafx.stage.Stage;
  *
  * @author becky
  */
-public class MenuView extends Application {
+public class MenuView extends Application implements EventHandler<ActionEvent> {
     
     GridPane newPane;
-    MenuController menuHandler;
+    StackPane subPane;
     String[] bText = {"New", "Load", "Save", "Edit", "View"};
     Button[] menuButtons = new Button[bText.length];
     Scene menuScene;
@@ -36,7 +38,9 @@ public class MenuView extends Application {
     @Override
     public void init()
     {
-        TreeManager.GetInstance();
+        this.subPane = new StackPane();
+        this.newPane = new GridPane();
+        this.menuScene = new Scene(newPane, 1280, 1024);
     }
     
     //https://stackoverflow.com/questions/30679025/graph-visualisation-like-yfiles-in-javafx
@@ -44,11 +48,8 @@ public class MenuView extends Application {
     public void start(Stage inputStage)
     {
         
-        this.newPane = new GridPane();
-        this.menuScene = new Scene(newPane, 1280, 1024);
-        this.menuHandler = new MenuController(this.menuScene, this.newPane);
+        
         this.SetGridPane();
-        this.SetButtonEvent();
         
         inputStage.setScene(this.menuScene);
         inputStage.setMaximized(true);
@@ -69,7 +70,9 @@ public class MenuView extends Application {
             menuButtons[ii] = new Button(bText[ii]);
             menuButtons[ii].setId(bText[ii]);
             menuButtons[ii].setMaxWidth(Double.MAX_VALUE);
+            menuButtons[ii].setOnAction(click->handle(click));
             vMenu.getChildren().add(menuButtons[ii]);
+            
         }
         
         //vMenu.setStyle("-fx-background-color: white;");
@@ -78,15 +81,6 @@ public class MenuView extends Application {
         
     }
     
-    private void SetButtonEvent()
-    {
-        this.menuHandler.SetMenuPane(newPane);
-        for(int ii = 0; ii < bText.length; ii += 1)
-        {
-            this.menuHandler.AddMenuButtons(menuButtons[ii]);
-            menuButtons[ii].setOnAction(click->menuHandler.handle(click));
-        }
-    }
     
     private void SetGridPane()
     {
@@ -96,6 +90,71 @@ public class MenuView extends Application {
         
     }
     
-    
+    @Override
+    public void handle(ActionEvent event) 
+    {
+        Button inputButton = (Button) event.getSource();
+        if (inputButton.getId().equals(menuButtons[0].getId()))
+        {
+            InputView inputForm = new InputView();
+            newPane.getChildren().remove(subPane);
+            subPane.getChildren().clear();
+            subPane.getChildren().add(inputForm.SetInputPane());
+            //subPane.setStyle("-fx-background-color: blue;");
+            subPane.prefWidthProperty().bind(this.menuScene.widthProperty().multiply(0.6));
+            newPane.add(subPane, 1, 0);
+            
+        }
+        else if(inputButton.getId().equals(menuButtons[1].getId()))
+        {
+            LoadView loadForm = new LoadView(this.subPane);
+            
+            subPane.prefWidthProperty().bind(this.menuScene.widthProperty().multiply(0.6));
+            
+            newPane.getChildren().remove(subPane);
+            subPane.getChildren().clear();
+            subPane.getChildren().add(loadForm.GetLoadPane());
+            
+            //subPane.setStyle("-fx-background-color: blue;");
+            
+            newPane.add(subPane, 1, 0);
+        }
+        else if(inputButton.getId().equals(menuButtons[2].getId()))
+        {
+            SaveView saveForm = new SaveView(this.subPane);
+            subPane.prefWidthProperty().bind(this.menuScene.widthProperty().multiply(0.6));
+            
+            newPane.getChildren().remove(subPane);
+            subPane.getChildren().clear();
+            subPane.getChildren().add(saveForm.GetLoadPane());
+            
+            //subPane.setStyle("-fx-background-color: blue;");
+            
+            newPane.add(subPane, 1, 0);
+            
+        }
+        else if(inputButton.getId().equals(menuButtons[3].getId()))
+        {
+            EditView editForm = new EditView();
+            newPane.getChildren().remove(subPane);
+            subPane.getChildren().clear();
+            subPane.getChildren().add(editForm.SetEditPane());
+            //subPane.setStyle("-fx-background-color: green;");
+            subPane.prefWidthProperty().bind(this.menuScene.widthProperty().multiply(0.6));
+            newPane.add(subPane, 1, 0);
+        }
+        else if(inputButton.getId().equals(menuButtons[4].getId()))
+        {
+            TreeView treeForm = new TreeView();
+            newPane.getChildren().remove(subPane);
+            subPane.getChildren().clear();
+            //subPane.getChildren().add(treeForm.SetTreePane());
+            //subPane.setStyle("-fx-background-color: green;");
+            subPane.prefWidthProperty().bind(this.menuScene.widthProperty().multiply(0.6));
+            newPane.add(subPane, 1, 0);
+            
+        }
+        
+    }
     
 }
