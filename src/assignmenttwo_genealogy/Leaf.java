@@ -145,10 +145,11 @@ public class Leaf {
     
     public void LeafPrint()
     {
-        for(int ii = 0; ii < this.children.size(); ii += 1)
-        {
-            System.out.println("id: " + this.children.get(ii).nodeID);
-        }
+        
+        System.out.println("id: " + this.nodeID);
+        System.out.println("name: " + this.firstName);
+            
+        
     }
     
     public Boolean IsEqual(Leaf targetNode)

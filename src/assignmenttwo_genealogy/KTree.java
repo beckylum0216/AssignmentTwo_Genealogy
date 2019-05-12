@@ -32,6 +32,8 @@ public class KTree {
         return this.size;
     }
     
+    
+    
     public Boolean Insert(Nodi inputNode)
     {
         return InsertNode(rootNode, inputNode);
@@ -46,34 +48,50 @@ public class KTree {
         {
             rootNode = newNode;
             this.size++;
+            System.out.println(this.size);
             return true;
         }
         
-        //Boolean checkEqual = currentNode.GetNodeID().equals(newNode.GetPrimaryParent());
-        //System.out.println("check state: " + checkEqual);
         
-        if(currentNode.GetNodeID().equals(newNode.GetPrimaryParent()))
+        
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        
+        
+        // 3rd generation won't insert!!!!!!!!!!!!!!!!!!!!!!!1
+        if(currentNode.GetChildren().isEmpty()) // <===== this is stupid! i have lost my mind here
         {
-            System.out.println("current node: " + currentNode.GetNodeID() + " input node: "+ newNode.GetPrimaryParent());
-            currentNode.AddChild(newNode);
-            System.out.println("array size: " + currentNode.GetChildren().size());
+            
+            newNode.LeafPrint();
+            System.out.println("Added leaf!!!");
+            currentNode.AddChild(newNode); //<--Here is the error? 3rd generation insertion won't happen
+            //System.out.println("array size: " + currentNode.GetChildren().size());
             this.size++;
+            System.out.println("new leaf insertion size: "+this.size);
             return true;
         }
-        else 
+        else
         {
-            
-            for(int ii = 0; ii < currentNode.GetChildren().size(); ii += 1)
+            //add siblings
+            if(newNode.GetPrimaryParent().equals(currentNode.GetNodeID()))
             {
-                //System.out.println("child node: " + currentNode.GetChildren().get(ii).GetNodeID() + " input node: "+ newNode.GetPrimaryParent());
-                
-                this.InsertNode(currentNode.GetChildren().get(ii), inputNode);
-                
-
-            }
+                //System.out.println("current node: " + currentNode.GetNodeID() + " input parent node: "+ newNode.GetPrimaryParent());
+                currentNode.AddChild(newNode);
+                this.size++;
+                System.out.println("new sibling insertion: "+this.size);
+                return true;
             
-            return false;
+            }
+            else 
+            {
+                // go down one generation
+                for(int ii = 0; ii < currentNode.GetChildren().size(); ii += 1)
+                {
+                    this.InsertNode(currentNode.GetChildren().get(ii), inputNode);
+                }
+                return false;
+            }
         }
+        
     }
     
     
@@ -113,25 +131,24 @@ public class KTree {
     
     public Leaf GetLeafNode(Nodi inputNode)
     {
-        System.out.println("tree size: " +this.size);
+        //System.out.println("tree size: " +this.size);
         return GetTargetNode(rootNode, inputNode);
     }
     
     private Leaf GetTargetNode(Leaf currentNode, Nodi inputNode)
     {
         Leaf targetNode = new Leaf(inputNode);
-        Leaf resultNode = new Leaf();
         
-        if(rootNode.GetNodeID().equals(targetNode.GetNodeID()))
-        {
-            resultNode =  rootNode;
-        }
         
         System.out.println("current: " + currentNode.GetNodeID() + " target: " + targetNode.GetNodeID());
         
         if(currentNode.GetNodeID().equals(targetNode.GetNodeID()))
         {
-            resultNode = currentNode;
+            
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            currentNode.LeafPrint();
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            return currentNode;
         }
         else
         {   
@@ -141,9 +158,11 @@ public class KTree {
                 GetTargetNode(currentNode.GetChildren().get(ii), inputNode);
             }
             
+            return null;
+            
         }
         
-        return resultNode;
+        
     }
     
     

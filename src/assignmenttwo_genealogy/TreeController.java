@@ -64,11 +64,13 @@ public class TreeController
         {
             Nodi targetNode = (Nodi) dbPair.getValue();
             
+            //targetNode.PrintNode();
+            
             Leaf targetLeaf = this.familyTree.GetLeafNode(targetNode);
-            
-            targetLeaf.LeafPrint();
-            
-            if(!(this.familyTree.GetLeafNode(targetNode) == null))
+            //System.out.println("###############################");
+            //targetLeaf.LeafPrint();
+            //System.out.println("###############################");
+            if(!targetNode.GetPersonID().isEmpty())
             {
                 LeafView newLeafView = new LeafView(targetLeaf);
                 Vector2 positionVector = new Vector2(newLeafView.GetNeighbour(), newLeafView.GetGeneration());
