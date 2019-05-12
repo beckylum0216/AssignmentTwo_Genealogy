@@ -27,11 +27,11 @@ public class LoadView implements EventHandler<ActionEvent>{
     private TextField inputField;
     private StackPane loadPane;
     private StackPane parentPane;
-    private ApplicationController appControl;
+   
     
     LoadView(StackPane targetPane)
     {
-        this.appControl = new ApplicationController();
+        
         this.parentPane = targetPane;
         loadPane = new StackPane();
         VBox loadBox = SetVBox();
@@ -74,7 +74,7 @@ public class LoadView implements EventHandler<ActionEvent>{
             FileInputStream inputFile = new FileInputStream(filePath);
             ObjectInputStream inputObject = new ObjectInputStream(inputFile);
             
-            appControl.SetTreeDB((GraphDatabase) inputObject.readObject());
+            ApplicationController.GetNewInstance().SetTreeDB((ChildDatabase) inputObject.readObject());
             
             inputFile.close();
             inputObject.close();

@@ -10,31 +10,31 @@ package assignmenttwo_genealogy;
  * @author becky
  */
 public class Vector2 {
-    private int x;
-    private int y;
+    private double x;
+    private double y;
     
-    Vector2(int inputX, int inputY)
+    public Vector2(double inputX, double inputY)
     {
         this.x = inputX;
         this.y = inputY;
     }
     
-    public void SetX(int inputX)
+    public void SetX(double inputX)
     {
         this.x = inputX;
     }
     
-    public int GetX()
+    public double GetX()
     {
         return this.x;
     }
     
-    public void SetY(int inputY)
+    public void SetY(double inputY)
     {
         this.y = inputY;
     }
     
-    public int GetY()
+    public double GetY()
     {
         return this.y;
     }

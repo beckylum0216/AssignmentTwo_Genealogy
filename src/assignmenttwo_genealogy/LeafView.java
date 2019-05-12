@@ -31,7 +31,7 @@ public class LeafView extends Leaf
     LeafView(Leaf inputNode)
     {
         super(inputNode);
-        this.leafPosition = new Vector2(0,0);
+        this.leafPosition = new Vector2(0f,0f);
         this.mod = 0;
         this.leafLabel = new Label(inputNode.GetFirstName()+" "+ inputNode.GetLastName());
         BackgroundFill nodeFill = new BackgroundFill(Color.web("92E4F0"), CornerRadii.EMPTY, Insets.EMPTY);

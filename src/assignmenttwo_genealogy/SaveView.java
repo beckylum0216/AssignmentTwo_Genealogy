@@ -27,12 +27,10 @@ public class SaveView implements EventHandler<ActionEvent>{
     private TextField inputField;
     private StackPane loadPane;
     private StackPane parentPane;
-    private ApplicationController appControl; 
-
     
     SaveView(StackPane targetPane)
     {
-        appControl = new ApplicationController();
+        
         this.parentPane = targetPane;
         loadPane = new StackPane();
         VBox loadBox = SetVBox();
@@ -75,7 +73,7 @@ public class SaveView implements EventHandler<ActionEvent>{
             FileOutputStream outputFile = new FileOutputStream(filePath);
             ObjectOutputStream outputObject  = new ObjectOutputStream(outputFile);
             
-            outputObject.writeObject(appControl.GetTreeDB());
+            outputObject.writeObject(ApplicationController.GetNewInstance().GetTreeDB());
             outputObject.close();
             outputFile.close();
             

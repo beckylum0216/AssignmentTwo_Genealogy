@@ -17,14 +17,24 @@ import java.util.List;
  * @author becky
  */
 public class ApplicationController {
-    private GraphDatabase treeDB = new GraphDatabase();
+    private ChildDatabase treeDB = new ChildDatabase();
     
-    public GraphDatabase GetTreeDB()
+    private static ApplicationController newInstance = new ApplicationController();
+    
+    private ApplicationController()
+    {}
+    
+    public static ApplicationController GetNewInstance()
+    {
+        return newInstance;
+    }
+    
+    public ChildDatabase GetTreeDB()
     {
         return this.treeDB;
     }
     
-    public void SetTreeDB(GraphDatabase inputDB)
+    public void SetTreeDB(ChildDatabase inputDB)
     {
         this.treeDB = inputDB;
     }

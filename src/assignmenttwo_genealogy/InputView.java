@@ -27,6 +27,7 @@ public class InputView implements EventHandler<ActionEvent>
     int numOfFields = 13;
     TextField[] inputFields = new TextField[numOfFields];
     
+    
     InputView()
     {
         
@@ -34,10 +35,6 @@ public class InputView implements EventHandler<ActionEvent>
     
     public GridPane SetInputPane()
     {
-        
-        
-        
-        
         
         GridPane newPane = new GridPane();
         newPane.setHgap(10);
@@ -99,9 +96,8 @@ public class InputView implements EventHandler<ActionEvent>
         tempNode.SetParentOne(inputFields[10].getText());
         tempNode.SetParentTwo(inputFields[11].getText());
         tempNode.SetPersonSpouse(inputFields[12].getText());
-        ApplicationController appControl = new ApplicationController();
-        appControl.GetTreeDB().AddNode(tempNode);
-        appControl.GetTreeDB().PeekNode(tempNode).PrintNode();
+        ApplicationController.GetNewInstance().GetTreeDB().AddNode(tempNode);
+        ApplicationController.GetNewInstance().GetTreeDB().PeekNode(tempNode).PrintNode();
         
     }
     

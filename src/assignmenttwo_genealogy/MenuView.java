@@ -148,7 +148,7 @@ public class MenuView extends Application implements EventHandler<ActionEvent> {
             TreeView treeForm = new TreeView();
             newPane.getChildren().remove(subPane);
             subPane.getChildren().clear();
-            //subPane.getChildren().add(treeForm.SetTreePane());
+            subPane.getChildren().add(treeForm.SetTreePane());
             //subPane.setStyle("-fx-background-color: green;");
             subPane.prefWidthProperty().bind(this.menuScene.widthProperty().multiply(0.6));
             newPane.add(subPane, 1, 0);

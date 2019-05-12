@@ -12,11 +12,13 @@ import java.util.ArrayList;
  * @author becky
  */
 public class Leaf {
-    
+
     private String nodeID;
     private String firstName;
     private String lastName;
-    private int generation;
+    private String primaryParent;
+    private double generation;
+    private double neighbour;
     private ArrayList<Leaf> children;
     
     
@@ -25,8 +27,10 @@ public class Leaf {
         this.nodeID = inputNode.GetPersonID();
         this.firstName = inputNode.GetFirstName();
         this.lastName = inputNode.GetLastNameBirth();
+        this.primaryParent = inputNode.GetParentOne();
         //this.siblings = new ArrayList<>();
         this.generation = 0;
+        this.neighbour = 0;
         this.children = new ArrayList<>();
     }
     
@@ -35,8 +39,9 @@ public class Leaf {
         this.nodeID = inputLeaf.GetNodeID();
         this.firstName = inputLeaf.GetFirstName();
         this.lastName = inputLeaf.GetLastName();
+        this.primaryParent = inputLeaf.primaryParent;
         this.generation = 0;
-        //this.siblings = new ArrayList<>();
+        this.neighbour = 0;
         this.children = new ArrayList<>();
     }
     
@@ -70,27 +75,37 @@ public class Leaf {
         return this.lastName;
     }
     
-    public void SetGeneration(int inputGeneration)
+    public void SetPrimaryParent(String inputParent)
+    {
+        this.primaryParent = inputParent;
+    }
+    
+    public String GetPrimaryParent()
+    {
+        return this.primaryParent;
+    }
+    
+    public void SetGeneration(double inputGeneration)
     {
         this.generation = inputGeneration;
     }
     
-    public int GetGeneration()
+    public double GetGeneration()
     {
         return this.generation;
     }
     
-    /*
-    public void SetSiblings(ArrayList<String> inputSiblings)
+    
+    public void SetNeighbour(double inputNeighbour)
     {
-        this.siblings = inputSiblings;
+        this.neighbour = inputNeighbour;
     }
     
-    public ArrayList<String> GetSiblings()
+    public double GetNeighbour()
     {
-        return this.siblings;
+        return this.neighbour;
     }
-    */
+    
     
     public void AddChild(Leaf inputChild)
     {
@@ -121,7 +136,44 @@ public class Leaf {
         return null;
     }
     
+    public void LeafPrint()
+    {
+        for(int ii = 0; ii < this.children.size(); ii += 1)
+        {
+            System.out.println("id: " + this.children.get(ii).nodeID);
+        }
+    }
     
+    public Boolean IsEqual(Leaf targetNode)
+    {
+        Boolean nodeFlag = false;
+        
+        if(this.nodeID == targetNode.GetNodeID())
+        {
+            if(this.firstName == targetNode.GetFirstName())
+            {
+                if(this.lastName == targetNode.GetLastName())
+                {
+                    nodeFlag = true;
+                }
+                else
+                {
+                    nodeFlag = false;
+                }
+                
+            }
+            else
+            {
+                nodeFlag = false;
+            }
+        }
+        else
+        {
+            nodeFlag = false;
+        }
+        
+        return nodeFlag;
+    }
             
     
 }
