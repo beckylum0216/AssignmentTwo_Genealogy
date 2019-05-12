@@ -22,6 +22,13 @@ public class Leaf {
     private ArrayList<Leaf> children;
     
     
+    Leaf()
+    {
+        this.generation = 0;
+        this.neighbour = 0;
+        this.children = new ArrayList<>();
+    }
+    
     Leaf(Nodi inputNode)
     {
         this.nodeID = inputNode.GetPersonID();

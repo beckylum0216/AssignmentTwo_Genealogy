@@ -63,7 +63,10 @@ public class TreeController
         for(Map.Entry dbPair:ApplicationController.GetNewInstance().GetTreeDB().familyTree.entrySet())
         {
             Nodi targetNode = (Nodi) dbPair.getValue();
+            
             Leaf targetLeaf = this.familyTree.GetLeafNode(targetNode);
+            
+            targetLeaf.LeafPrint();
             
             if(!(this.familyTree.GetLeafNode(targetNode) == null))
             {

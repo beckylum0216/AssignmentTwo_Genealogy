@@ -23,7 +23,7 @@ public class ChildDatabase implements Serializable{
     {
         System.out.println("Running Tree Manager constructor...");
         familyTree = new HashMap<>();
-        System.out.println("Tree manager size: " + this.familyTree.size());
+        
     }
     
     public void SetFamilyTree(HashMap<String, Nodi> inputTree)

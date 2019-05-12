@@ -23,7 +23,6 @@ public class KTree {
     
     KTree()
     {
-        
         this.rootNode = null;
         this.size = 0;
     }
@@ -55,32 +54,26 @@ public class KTree {
         
         if(currentNode.GetNodeID().equals(newNode.GetPrimaryParent()))
         {
-            //System.out.println("current node: " + currentNode.GetNodeID() + " input node: "+ newNode.GetPrimaryParent());
+            System.out.println("current node: " + currentNode.GetNodeID() + " input node: "+ newNode.GetPrimaryParent());
             currentNode.AddChild(newNode);
-            //currentNode.LeafPrint();
+            System.out.println("array size: " + currentNode.GetChildren().size());
             this.size++;
             return true;
         }
-        else
+        else 
         {
+            
             for(int ii = 0; ii < currentNode.GetChildren().size(); ii += 1)
             {
-                if(currentNode.GetChildren().get(ii).GetNodeID().equals(newNode.GetPrimaryParent()))
-                {
-                    //System.out.println("child node: " + currentNode.GetChildren().get(ii).GetNodeID() + " input node: "+ newNode.GetPrimaryParent());
-                    this.InsertNode(currentNode.GetChildren().get(ii), inputNode);
-                }
-                else
-                {
-                    currentNode.AddChild(newNode);
-                    //currentNode.LeafPrint();
-                    this.size++;
-                    return true;
-                }
+                //System.out.println("child node: " + currentNode.GetChildren().get(ii).GetNodeID() + " input node: "+ newNode.GetPrimaryParent());
+                
+                this.InsertNode(currentNode.GetChildren().get(ii), inputNode);
+                
+
             }
+            
+            return false;
         }
-        
-        return false;
     }
     
     
@@ -127,35 +120,30 @@ public class KTree {
     private Leaf GetTargetNode(Leaf currentNode, Nodi inputNode)
     {
         Leaf targetNode = new Leaf(inputNode);
+        Leaf resultNode = new Leaf();
         
         if(rootNode.GetNodeID().equals(targetNode.GetNodeID()))
         {
-            return rootNode;
+            resultNode =  rootNode;
         }
         
         System.out.println("current: " + currentNode.GetNodeID() + " target: " + targetNode.GetNodeID());
-        if(currentNode.GetNodeID() == targetNode.GetNodeID())
+        
+        if(currentNode.GetNodeID().equals(targetNode.GetNodeID()))
         {
-            return currentNode;
-            
+            resultNode = currentNode;
         }
         else
         {   
             // recursively go through the tree to find node
             for(int ii = 0; ii < currentNode.GetChildren().size(); ii += 1)
             {
-                if(currentNode.GetChildren().get(ii).GetNodeID().equals(targetNode.GetNodeID()))
-                {
-                    GetTargetNode(currentNode.GetChildren().get(ii), inputNode);
-                }
-                
-                
+                GetTargetNode(currentNode.GetChildren().get(ii), inputNode);
             }
             
         }
         
-        
-        return null;
+        return resultNode;
     }
     
     
