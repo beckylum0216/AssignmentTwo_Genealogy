@@ -136,8 +136,6 @@ public class KTree {
         System.out.println("current: " + currentNode.GetNodeID() + " target: " + targetNode.GetNodeID());
         if(currentNode.GetNodeID() == targetNode.GetNodeID())
         {
-            
-            
             return currentNode;
             
         }
