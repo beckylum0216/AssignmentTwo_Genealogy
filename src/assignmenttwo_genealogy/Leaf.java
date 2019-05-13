@@ -47,8 +47,8 @@ public class Leaf {
         this.firstName = inputLeaf.GetFirstName();
         this.lastName = inputLeaf.GetLastName();
         this.primaryParent = inputLeaf.primaryParent;
-        this.generation = 0;
-        this.neighbour = 0;
+        this.generation = inputLeaf.GetGeneration();
+        this.neighbour = inputLeaf.GetNeighbour();
         this.children = new ArrayList<>();
     }
     
@@ -148,6 +148,7 @@ public class Leaf {
         
         System.out.println("id: " + this.nodeID);
         System.out.println("name: " + this.firstName);
+        System.out.println("generation: " + this.GetGeneration());
             
         
     }

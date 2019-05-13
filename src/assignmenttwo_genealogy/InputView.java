@@ -97,7 +97,7 @@ public class InputView implements EventHandler<ActionEvent>
         tempNode.SetParentTwo(inputFields[11].getText());
         tempNode.SetPersonSpouse(inputFields[12].getText());
         ApplicationController.GetNewInstance().GetTreeDB().AddNode(tempNode);
-        ApplicationController.GetNewInstance().GetTreeDB().PeekNode(tempNode).PrintNode();
+        ApplicationController.GetNewInstance().GetTreeDB().FindNode(tempNode).PrintNode();
         
     }
     

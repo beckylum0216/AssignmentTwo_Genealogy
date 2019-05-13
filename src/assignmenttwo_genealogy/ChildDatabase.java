@@ -16,8 +16,8 @@ import java.util.HashMap;
 public class ChildDatabase implements Serializable{
     
     
-    
-    HashMap<String, Nodi> familyTree;
+    private Nodi rootNode;
+    private HashMap<String, Nodi> familyTree;
     
     public ChildDatabase()
     {
@@ -38,12 +38,22 @@ public class ChildDatabase implements Serializable{
     
     public void AddNode(Nodi inputNode)
     {
+        if(this.familyTree.isEmpty())
+        {
+            rootNode = inputNode;
+        }
+        
         this.familyTree.put(inputNode.GetPersonID(), inputNode);        
     }
     
-    public Nodi PeekNode(Nodi inputNode)
+    public Nodi FindNode(Nodi inputNode)
     {
         return this.familyTree.get(inputNode.GetPersonID());
+    }
+    
+    public Nodi GetRootNode()
+    {
+        return this.rootNode;
     }
     
 }

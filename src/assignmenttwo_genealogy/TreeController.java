@@ -19,8 +19,9 @@ import java.util.Stack;
 public class TreeController 
 {
     
-    ArrayList <LeafView> treeList;
-    private KTree familyTree;
+    private ArrayList <LeafView> treeList;
+   
+    private Graph familyTree;
     
     
     public TreeController()
@@ -31,12 +32,12 @@ public class TreeController
     
     private void PopulateFamilyTree()
     {
-        for(Map.Entry familyPair:ApplicationController.GetNewInstance().GetTreeDB().familyTree.entrySet())
+        for(Map.Entry familyPair:ApplicationController.GetNewInstance().GetTreeDB().GetFamilyTree().entrySet())
         {
             Nodi inputNode = (Nodi) familyPair.getValue();
+            this.familyTree.AddNode(inputNode);
             
-            System.out.println("insert success: " + this.familyTree.Insert(inputNode));
-            System.out.println("after insertion tree size: " + this.familyTree.GetSize());
+            System.out.println("after insertion tree size: " + this.familyTree.GetNodeList().size());
         }
     }
     
@@ -45,41 +46,41 @@ public class TreeController
      * @see https://www.geeksforgeeks.org/level-node-tree-source-node-using-bfs/
      * @param root starting node
      */
-    private void SetPosition()
+    private ArrayList<Leaf> SetPosition()
     {
-        this.familyTree.BreadthFirstTraversal();
+        Nodi rootNode = ApplicationController.GetNewInstance().GetTreeDB().GetRootNode();
+        ArrayList <Leaf> nodeLevel = this.familyTree.BreadthFirstTraversal(rootNode);
+        for(Leaf indexLeaf: nodeLevel)
+        {
+            indexLeaf.LeafPrint();
+        }
+        return nodeLevel;
         
     }
     
     public ArrayList<LeafView> GetTreeList()
     {
-        this.familyTree = new KTree();
+        this.familyTree = new Graph();
         treeList = new ArrayList<>();
         this.PopulateFamilyTree();
-        //System.out.println("tree size: " +this.familyTree.GetSize());
         
-        this.SetPosition();
+        // get generation info
+        ArrayList <Leaf> leafList = this.SetPosition();
         
-        for(Map.Entry dbPair:ApplicationController.GetNewInstance().GetTreeDB().familyTree.entrySet())
+        for(int ii = 0; ii < leafList.size(); ii += 1)
         {
-            Nodi targetNode = (Nodi) dbPair.getValue();
             
-            //targetNode.PrintNode();
+            LeafView newLeafView = new LeafView(leafList.get(ii));
+            System.out.println("#############################################");
+            newLeafView.LeafPrint();
             
-            Leaf targetLeaf = this.familyTree.GetLeafNode(targetNode);
-            //System.out.println("###############################");
-            //targetLeaf.LeafPrint();
-            //System.out.println("###############################");
-            if(!targetNode.GetPersonID().isEmpty())
-            {
-                LeafView newLeafView = new LeafView(targetLeaf);
-                Vector2 positionVector = new Vector2(newLeafView.GetNeighbour(), newLeafView.GetGeneration());
-                newLeafView.SetLeafPosition(positionVector);
-                treeList.add(newLeafView);
-            }
+            System.out.println("id:"+ newLeafView.GetNodeID() + " generation: " + newLeafView.GetGeneration());
+            Vector2 positionVector = new Vector2(newLeafView.GetNeighbour(), newLeafView.GetGeneration());
+            newLeafView.SetLeafPosition(positionVector);
+            treeList.add(newLeafView);
             
         }
-        
+            
         return this.treeList;
     }
     
