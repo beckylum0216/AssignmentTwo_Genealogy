@@ -21,86 +21,111 @@ import java.util.TreeSet;
  */
 public class Graph {
     
-    private Set<Nodi> nodeList;
-    private Set<Edge> edgeList;
-    private Map<Nodi, Set<Edge>> adjList;
+    
+    
+    private HashMap<String, LinkedList<Leaf>> adjList;
    
     
     Graph()
     {
-        this.nodeList = new HashSet<>();
-        this.edgeList = new HashSet<>();
+       
         this.adjList = new HashMap<>();
         
     }
     
-   
-    public void AddNode(Nodi inputNode)
+    
+    public void AddEdge(Nodi sourceNode, Nodi destinationNode)
     {
-        this.nodeList.add(inputNode);
+        Leaf sourceLeaf = new Leaf(sourceNode);
+        Leaf destinationLeaf = new Leaf(destinationNode);
+        
+        if(!this.adjList.containsKey(sourceLeaf.GetNodeID()))
+        {
+            LinkedList<Leaf> newList = new LinkedList<>();
+            newList.add(destinationLeaf);
+            this.adjList.put(sourceLeaf.GetNodeID(), newList);
+        }
+        else
+        {
+            this.adjList.get(sourceLeaf.GetNodeID()).add(destinationLeaf);
+        }
+        
     }
     
-    public Set<Nodi> GetNodeList()
-    {
-        return this.nodeList;
-    }
-    
-    public void AddEdge(Edge inputEdge)
-    {
-        this.edgeList.add(inputEdge);
-    }
-    
-    public Set<Edge> GetEdgeList()
-    {
-        return this.edgeList;
-    }
-    
-    public void SetAdjList(Map<Nodi, Set<Edge>> inputAdjList)
+    public void SetAdjList(HashMap<String, LinkedList<Leaf>> inputAdjList)
     {
         this.adjList = inputAdjList;
     }
     
-    public Map<Nodi, Set<Edge>> GetAdjList()
+    public HashMap<String, LinkedList<Leaf>> GetAdjList()
     {
         return this.adjList;
     }
     
+    public void PrintAdjList()
+    {
+        for(LinkedList<Leaf> index:this.adjList.values())
+        {
+            for(Leaf indexNode: index)
+            {
+                indexNode.LeafPrint();
+            }
+        }
+    }
+    
+    /**
+     * <p>Setting the depth of each node</p>
+     * @see https://www.geeksforgeeks.org/level-node-tree-source-node-using-bfs/
+     * @param root starting node
+     */
     public ArrayList<Leaf> BreadthFirstTraversal(Nodi firstNode)
     {
+        System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+        PrintAdjList();
+        System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+        
         ArrayList <Leaf> nodeLeaf = new ArrayList<>();
         HashMap<String, Leaf> nodeLevel = new HashMap<>();
-        ArrayList<Nodi> visitedNode = new ArrayList<>();
+        ArrayList<Leaf> visitedNode = new ArrayList<>();
         Queue <Leaf> list = new LinkedList<>();
         
         Leaf tempLeaf = new Leaf(firstNode);
         tempLeaf.SetGeneration(0);
-        visitedNode.add(firstNode);
+        visitedNode.add(tempLeaf);
         list.add(tempLeaf);
         nodeLevel.put(tempLeaf.GetNodeID(), tempLeaf);
         
         while(!list.isEmpty())
         {
-            tempLeaf = list.element();
-            System.out.println("first element: " + tempLeaf.GetGeneration());
-            list.remove();
+            tempLeaf = list.poll();
+            System.out.println("parent element: " + tempLeaf.GetNodeID() + " list size: " + list.size());
             
-            for(Nodi tempNode: nodeList)
+            if(this.adjList.containsKey(tempLeaf.GetNodeID()))
             {
-                if(!visitedNode.contains(tempNode))
+                for(int ii = 0; ii < this.adjList.get(tempLeaf.GetNodeID()).size(); ii += 1)
                 {
-                    Leaf newLeaf = new Leaf(tempNode);
-                    newLeaf.SetGeneration(nodeLevel.get(tempLeaf.GetNodeID()).GetGeneration() + 1);
-                    visitedNode.add(tempNode);
-                    list.add(newLeaf);
-                    nodeLevel.put(newLeaf.GetNodeID(), newLeaf);
+
+                        Leaf newLeaf = this.adjList.get(tempLeaf.GetNodeID()).get(ii);
+
+                        if(!visitedNode.contains(newLeaf))
+                        {
+                            newLeaf.SetGeneration(nodeLevel.get(tempLeaf.GetNodeID()).GetGeneration() + 1);
+                            visitedNode.add(newLeaf);
+                            list.add(newLeaf);
+                            nodeLevel.put(newLeaf.GetNodeID(), newLeaf);
+                        }
                 }
             }
-            
-        }
+            else
+            {
+                for(Leaf indexLeaf:nodeLevel.values())
+                {
+                    nodeLeaf.add(indexLeaf);
+                }
         
-        for(Leaf indexLeaf:nodeLevel.values())
-        {
-            nodeLeaf.add(indexLeaf);
+                return nodeLeaf;
+            }
+            
         }
         
         return nodeLeaf;

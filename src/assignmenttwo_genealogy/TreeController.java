@@ -32,24 +32,39 @@ public class TreeController
     
     private void PopulateFamilyTree()
     {
+        ArrayList <Nodi> tempList = new ArrayList<>();
         for(Map.Entry familyPair:ApplicationController.GetNewInstance().GetTreeDB().GetFamilyTree().entrySet())
         {
             Nodi inputNode = (Nodi) familyPair.getValue();
-            this.familyTree.AddNode(inputNode);
-            
-            System.out.println("after insertion tree size: " + this.familyTree.GetNodeList().size());
+            System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+            inputNode.PrintNode();
+            Nodi parentNode = ApplicationController.GetNewInstance().GetTreeDB().GetFamilyTree().get(inputNode.GetParentOne());
+            this.familyTree.AddEdge(parentNode, inputNode);
+            tempList.add(inputNode);
+            System.out.println("after insertion tree size: " + this.familyTree.GetAdjList().size());
         }
+        
+        
+        
     }
     
-    /**
-     * <p>Setting the depth of each node</p>
-     * @see https://www.geeksforgeeks.org/level-node-tree-source-node-using-bfs/
-     * @param root starting node
-     */
+    
     private ArrayList<Leaf> SetPosition()
     {
         Nodi rootNode = ApplicationController.GetNewInstance().GetTreeDB().GetRootNode();
-        ArrayList <Leaf> nodeLevel = this.familyTree.BreadthFirstTraversal(rootNode);
+        System.out.println("Root node ########################");
+        rootNode.PrintNode();
+        ArrayList <Leaf> nodeLevel = new ArrayList<>();
+        
+        try
+        {
+            nodeLevel = this.familyTree.BreadthFirstTraversal(rootNode);
+        }
+        catch(IllegalArgumentException e)
+        {
+            System.out.println(e);
+        }
+        
         for(Leaf indexLeaf: nodeLevel)
         {
             indexLeaf.LeafPrint();

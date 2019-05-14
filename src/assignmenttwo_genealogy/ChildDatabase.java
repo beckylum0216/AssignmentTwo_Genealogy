@@ -40,7 +40,7 @@ public class ChildDatabase implements Serializable{
     {
         if(this.familyTree.isEmpty())
         {
-            rootNode = inputNode;
+            this.SetRootNode();
         }
         
         this.familyTree.put(inputNode.GetPersonID(), inputNode);        
@@ -49,6 +49,17 @@ public class ChildDatabase implements Serializable{
     public Nodi FindNode(Nodi inputNode)
     {
         return this.familyTree.get(inputNode.GetPersonID());
+    }
+    
+    private void SetRootNode()
+    {
+        rootNode = new Nodi();
+        rootNode.SetPersonID("root001");
+        rootNode.SetFirstName("root001");
+        rootNode.SetLastNameBirth("root001");
+        rootNode.SetLastNameMarraige("root001");
+        rootNode.SetParentOne("root001");
+        this.familyTree.put(rootNode.GetPersonID(), rootNode);
     }
     
     public Nodi GetRootNode()

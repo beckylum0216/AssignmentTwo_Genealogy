@@ -49,13 +49,17 @@ public class TreeView {
         // add nodes
         for(int ii = 0; ii < this.activeView.size(); ii += 1)
         {
-            this.activeView.get(ii).GetLeafView().layoutXProperty()
-                            .bind(newPane.widthProperty()
-                                    .subtract(this.activeView.get(ii).GetLeafView().widthProperty()).divide(2));
-                    
-            this.activeView.get(ii).GetLeafView().setTranslateX((double)this.activeView.get(ii).GetLeafPosition().GetX() * (labelWidth + labelMargin));
-            this.activeView.get(ii).GetLeafView().setTranslateY((double)this.activeView.get(ii).GetLeafPosition().GetY() * (labelHeight + labelMargin));
-            newPane.getChildren().add(this.activeView.get(ii).GetLeafView());
+            if(!this.activeView.get(ii).GetNodeID().equals("root001"))
+            {
+                this.activeView.get(ii).GetLeafView().layoutXProperty()
+                                .bind(newPane.widthProperty()
+                                .subtract(this.activeView.get(ii)
+                                .GetLeafView().widthProperty()).divide(2));
+
+                this.activeView.get(ii).GetLeafView().setTranslateX((double)this.activeView.get(ii).GetLeafPosition().GetX() * (labelWidth + labelMargin));
+                this.activeView.get(ii).GetLeafView().setTranslateY((double)this.activeView.get(ii).GetLeafPosition().GetY() * (labelHeight + labelMargin));
+                newPane.getChildren().add(this.activeView.get(ii).GetLeafView());
+            }
         }
         
         return newPane;

@@ -27,7 +27,7 @@ public class LoadView implements EventHandler<ActionEvent>{
     private TextField inputField;
     private StackPane loadPane;
     private StackPane parentPane;
-   
+    private VBox vMenu;
     
     LoadView(StackPane targetPane)
     {
@@ -46,7 +46,7 @@ public class LoadView implements EventHandler<ActionEvent>{
     
     private VBox SetVBox()
     {
-        VBox vMenu = new VBox();
+        vMenu = new VBox();
         Insets newInset = new Insets(10,10,10,10);
         vMenu.setSpacing(10);
         vMenu.setAlignment(Pos.TOP_CENTER);
@@ -87,6 +87,9 @@ public class LoadView implements EventHandler<ActionEvent>{
             System.out.println(e);
         }
         
+        int size = ApplicationController.GetNewInstance().GetTreeDB().GetFamilyTree().size();
+        Label confirmationLabel = new Label("Database size: " + size);
+        vMenu.getChildren().add(confirmationLabel);
         
     }
     

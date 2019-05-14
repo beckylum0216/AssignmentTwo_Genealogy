@@ -53,7 +53,7 @@ public class SaveView implements EventHandler<ActionEvent>{
         
         Label inputLabel = new Label("Path to File:");
         inputField = new TextField("src/assignmenttwo_genealogy/FamilyMembers.dat");
-        Button inputButton = new Button("Load File");
+        Button inputButton = new Button("Save File");
         inputButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         inputButton.setOnAction(click->this.handle(click));
         vMenu.getChildren().addAll(inputLabel, inputField, inputButton);
