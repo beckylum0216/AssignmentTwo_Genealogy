@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="AssignmentTwo_Genealogy.jar" size="6877741" download="eager" />
+    <jar href="AssignmentTwo_Genealogy.jar" size="6879791" download="eager" />
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="assignmenttwo_genealogy.AssignmentTwo_Genealogy"  name="AssignmentTwo_Genealogy" />
   <update check="always"/>

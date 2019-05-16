@@ -36,9 +36,9 @@ public class TreeView {
     public Pane SetTreePane()
     {
         treeHandler = new TreeController();
-        double labelWidth = 40.0;
-        double labelMargin = 10.0;
-        double labelHeight = 15.0;
+        double labelWidth = 100.0;
+        double labelMargin = 20.0;
+        double labelHeight = 20.0;
         
         Pane newPane = new Pane();
         

@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
+import javafx.geometry.Pos;
 
 /**
  *
@@ -52,12 +53,12 @@ public class TreeController
     private ArrayList<Leaf> SetPosition()
     {
         Nodi rootNode = ApplicationController.GetNewInstance().GetTreeDB().GetRootNode();
-        System.out.println("Root node ########################");
-        rootNode.PrintNode();
+        
         ArrayList <Leaf> nodeLevel = new ArrayList<>();
         
         try
         {
+            //nodeLevel = this.familyTree.BreadthFirstTraversal(rootNode);
             nodeLevel = this.familyTree.BreadthFirstTraversal(rootNode);
         }
         catch(IllegalArgumentException e)
@@ -89,8 +90,11 @@ public class TreeController
             System.out.println("#############################################");
             newLeafView.LeafPrint();
             
-            System.out.println("id:"+ newLeafView.GetNodeID() + " generation: " + newLeafView.GetGeneration());
+            System.out.println("id:"+ newLeafView.GetNodeID() + " generation: " + newLeafView.GetGeneration() + " neighbour: " + newLeafView.GetNeighbour());
             Vector2 positionVector = new Vector2(newLeafView.GetNeighbour(), newLeafView.GetGeneration());
+            //newLeafView.GetLeafView().setMinWidth(100);
+            //newLeafView.GetLeafView().setMinHeight(20);
+            newLeafView.GetLeafView().setAlignment(Pos.CENTER);
             newLeafView.SetLeafPosition(positionVector);
             treeList.add(newLeafView);
             

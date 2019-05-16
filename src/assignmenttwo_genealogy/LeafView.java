@@ -25,19 +25,22 @@ public class LeafView extends Leaf
 {
     
     private Vector2 leafPosition;
-    private float mod;
+    private float modifier;
+    private Vector2 minOffSet;
+    private Vector2 maxOffSet;
+    private Boolean IsLeaf;
     Label leafLabel;
     
     LeafView(Leaf inputNode)
     {
         super(inputNode);
         this.leafPosition = new Vector2(0f,0f);
-        this.mod = 0;
+        this.modifier = 0;
         this.leafLabel = new Label(inputNode.GetFirstName()+" "+ inputNode.GetLastName());
         BackgroundFill nodeFill = new BackgroundFill(Color.web("92E4F0"), CornerRadii.EMPTY, Insets.EMPTY);
         Background nodeBackground = new Background(nodeFill);
         this.leafLabel.setBackground(nodeBackground);
-        this.leafLabel.setMinWidth(50);
+        this.leafLabel.setMinWidth(100);
         this.leafLabel.setMinHeight(25);
     }
     

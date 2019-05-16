@@ -20,7 +20,10 @@ public class Leaf {
     private double generation;
     private double neighbour;
     private ArrayList<Leaf> children;
-    
+    private Boolean IsLeaf;
+    private Boolean IsLeftMost;
+    private Boolean IsRightMost;
+    private double mod;
     
     Leaf()
     {
@@ -39,6 +42,9 @@ public class Leaf {
         this.generation = 0;
         this.neighbour = 0;
         this.children = new ArrayList<>();
+        this.IsLeaf = false;
+        this.IsLeftMost = false;
+        this.IsRightMost = false;
     }
     
     Leaf(Leaf inputLeaf)
@@ -184,5 +190,45 @@ public class Leaf {
         return nodeFlag;
     }
             
+    public void SetLeafState(Boolean inputState)
+    {
+        this.IsLeaf = inputState;
+    }
+    
+    public Boolean GetLeafState()
+    {
+        return this.IsLeaf;
+    }
+    
+    public void SetLeftMostState(Boolean inputState)
+    {
+        this.IsLeftMost = inputState;
+    }
+    
+    public Boolean GetLeftMostState()
+    {
+        return this.IsLeftMost;
+    }
+    
+    public void SetRightMostState(Boolean inputState)
+    {
+        this.IsRightMost = inputState;
+    }
+    
+    public Boolean GetRightMostState()
+    {
+        return this.IsRightMost;
+    }
+    
+    public void SetMod(double inputMod)
+    {
+        this.mod = inputMod;
+    }
+    
+    public double GetMod()
+    {
+        return this.mod;
+    }
+    
     
 }
