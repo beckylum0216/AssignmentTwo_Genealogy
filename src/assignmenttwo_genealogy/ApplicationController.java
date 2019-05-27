@@ -21,19 +21,37 @@ public class ApplicationController {
     
     private static ApplicationController newInstance = new ApplicationController();
     
+    
+     /**
+     * <p>Singleton constructor for ChildDatabase, controls access.</P>
+     */
     private ApplicationController()
     {}
     
+    /**
+     * <p>Singleton constructor for ChildDatabase, controls access.</P>
+     * @return an static instance of Application controller
+     */
     public static ApplicationController GetNewInstance()
     {
         return newInstance;
     }
     
+    
+    
+    /**
+     * <p>Accessor to the child database</P>
+     * @return a hashtable of records 
+     */
     public ChildDatabase GetTreeDB()
     {
         return this.treeDB;
     }
     
+    /**
+     * <p>Mutator to the child database</P>
+     * @param inputDB database input
+     */
     public void SetTreeDB(ChildDatabase inputDB)
     {
         this.treeDB = inputDB;

@@ -17,11 +17,19 @@ public class Address implements Serializable{
     public String state;
     public int postcode;
     
+    
+    /**
+     * <p>Default constructor for address. This is really a struct</P>
+     */
     Address()
     {
         
     }
     
+    
+    /**
+     * <p>Parameterised constructor for address</P>
+     */
     Address(String inputStreet, String inputCountry, String inputState, int inputPostcode)
     {
         this.street = inputStreet;

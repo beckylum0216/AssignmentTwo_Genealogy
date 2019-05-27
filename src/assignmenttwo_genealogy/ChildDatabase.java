@@ -19,6 +19,11 @@ public class ChildDatabase implements Serializable{
     private Nodi rootNode;
     private HashMap<String, Nodi> familyTree;
     
+    
+    /**
+     * <p>Default constructor to the child database</P>
+     * @param inputDB database input
+     */
     public ChildDatabase()
     {
         System.out.println("Running Tree Manager constructor...");

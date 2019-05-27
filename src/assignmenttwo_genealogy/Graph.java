@@ -78,7 +78,7 @@ public class Graph {
     
     /**
      * <p>Setting the generation of each node</p>
-     * @see https://www.geeksforgeeks.org/level-node-tree-source-node-using-bfs/
+     * @see <a href ="https://www.geeksforgeeks.org/level-node-tree-source-node-using-bfs/">https://www.geeksforgeeks.org/level-node-tree-source-node-using-bfs/</a>
      * @see https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
      * @see https://hackernoon.com/graphs-in-cs-and-its-traversal-algorithms-cfee5533f74e
      * @param root starting node
@@ -128,9 +128,9 @@ public class Graph {
                 this.FindLeafNodes();
                 this.FindLeftMostSibling();
                 this.FindRightMostSibling();
-                nodeLevel = this.RepositionChildNodes(nodeLevel);
                 nodeLevel = this.SetModPosition(nodeLevel);
-                nodeLevel = this.SetAdjustedPosition(nodeLevel);
+                //nodeLevel = this.RepositionChildNodes(nodeLevel);
+                //nodeLevel = this.SetAdjustedPosition(nodeLevel);
                 
                 for(Leaf indexLeaf:nodeLevel.values())
                 {
@@ -155,20 +155,19 @@ public class Graph {
     public HashMap<String, Leaf> RepositionChildNodes(HashMap<String, Leaf> inputMap)
     {
         HashMap<String, Leaf> tempMap = inputMap;
+        ArrayList<Leaf> leafList = new ArrayList<Leaf>();
         
         int count = 0;
         
         for(Leaf index:tempMap.values())
         {
-            
-            index.SetNeighbour(count);
-            
-            
-            count++;
+            System.out.println("Generation: "+ index.GetGeneration()+" Neighbour: "+ index.GetNeighbour() + " mod: "+ index.GetMod());
         }
         
         return tempMap;
     }
+    
+    
     
     
     /**
@@ -227,6 +226,8 @@ public class Graph {
         }
     }
     
+    
+    
     private HashMap<String, Leaf> SetModPosition(HashMap<String, Leaf> inputMap)
     {
         HashMap <Double, ArrayList<Leaf>> generationSiblings = new HashMap<>();
@@ -262,8 +263,8 @@ public class Graph {
                 }
             }
             
-            Long tempMod = Math.round((leftMostPosition + rightMostPosition) / 2.0);
-            generationMod = tempMod.doubleValue();
+            double tempMod = (leftMostPosition + rightMostPosition) / 2.0;
+            generationMod = tempMod;
             
         }
         
@@ -291,25 +292,27 @@ public class Graph {
             }
         }
         
-        
-        
+        int leftCount = 0;
+        int rightCount = 0;
         for(Leaf index:inputMap.values())
         {
-            if(parentList.contains(index))
-            {
-                inputMap.get(index.GetPrimaryParent()).SetNeighbour(index.GetMod());
-            }
-            else
+            if(!(index.GetNodeID() == "root001"))
             {
                 if(index.GetNeighbour() < index.GetMod())
                 {
-                    index.SetNeighbour(index.GetNeighbour() - 1);
+                    index.SetNeighbour(index.GetNeighbour() + leftCount);
+                    leftCount--;
                 }
                 else
                 {
-                    index.SetNeighbour(index.GetNeighbour() + 1);
+                    index.SetNeighbour(index.GetNeighbour() +  rightCount);
+                    rightCount++;
                 }
             }
+            
+                
+                
+            
             
         }
         

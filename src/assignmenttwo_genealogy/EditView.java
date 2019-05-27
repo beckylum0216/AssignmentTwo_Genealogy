@@ -13,10 +13,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -28,23 +31,36 @@ import javafx.stage.Stage;
 public class EditView implements EventHandler<ActionEvent>
 {
     
+    private ListView<String> newList;
+    private int numOfFields = 13;
+    private TextField[] inputFields = new TextField[numOfFields];
+    private EditMouseHandler mouseHandle;
     
     public EditView()
     {
-        
+         
     }
             
     public GridPane SetEditPane()
     {
         
-        int numOfFields = 13;
-        TextField[] inputFields = new TextField[numOfFields];
-        
-        
         GridPane newPane = new GridPane();
+        
+        ScrollPane scrollSubPane = new ScrollPane();
+        newList = new ListView();
+        newList.getItems().addAll(ApplicationController.GetNewInstance().GetTreeDB().GetFamilyTree().keySet());
+        scrollSubPane.setContent(newList);
+        scrollSubPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollSubPane.setFitToHeight(true);
+        scrollSubPane.setFitToWidth(true);
+        
+        
+        
+        newPane.add(scrollSubPane, 0, 0, 1,15);
+        
         newPane.setHgap(10);
         newPane.setGridLinesVisible(false);
-        int numberOfColumns = 2;
+        int numberOfColumns = 3;
         for(int ii = 0; ii < numberOfColumns; ii += 1)
         {
             ColumnConstraints newColumn = new ColumnConstraints();
@@ -71,40 +87,62 @@ public class EditView implements EventHandler<ActionEvent>
         {
             Label myLabel = new Label(tempLabels.get(ii));
             inputFields[ii] = new TextField(); 
-            
-            newPane.add(myLabel, 0, ii);
-            newPane.add(inputFields[ii], 1, ii);
+            newPane.add(myLabel, 1, ii);
+            newPane.add(inputFields[ii], 2, ii);
         }
+        
+        mouseHandle = new EditMouseHandler(this.newList, this.inputFields);
+        newList.setOnMouseClicked(click ->mouseHandle.handle(click));
+        
         
         Button editButton = new Button("Edit");
         editButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         
         editButton.setOnAction(click ->handle(click));
-        newPane.add(editButton, 1, 14, 2, 1);
+        newPane.add(editButton, 2, 14, 1, 1);
         
+        GridPane subPane = new GridPane();
+        ColumnConstraints columnOne = new ColumnConstraints();
+        columnOne.setPercentWidth(50);
+        subPane.getColumnConstraints().add(columnOne);
+        ColumnConstraints columnTwo = new ColumnConstraints();
+        columnTwo.setPercentWidth(50);
+        subPane.getColumnConstraints().add(columnTwo);
+        
+//        Button fwdButton = new Button(">>");
+//        Button bwdButton = new Button("<<");
+//        fwdButton.setOnAction(click ->handle(click));
+//        bwdButton.setOnAction(click ->handle(click));
+//        fwdButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+//        bwdButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        //subPane.add(bwdButton, 0,1);
+        //subPane.add(fwdButton, 1,1);
+        
+        newPane.add(subPane, 2,15);
         
         return newPane;
     }
     
     @Override
     public void handle(ActionEvent event) {
-        Button inputButton = (Button) event.getSource();
-       
-        if (inputButton.getText().equals("Edit"))
-        {
-            System.out.println("Edit");
-            
-        }
-        else if(inputButton.getText().equals("Previous"))
-        {
-            System.out.println("Select previous");
-        }
-        else if(inputButton.getText().equals("Next"))
-        {
-            System.out.println("Select Next");
-        }
+        
+        Nodi tempNode = mouseHandle.GetCurrentRecord();
+        
+        tempNode.SetPersonID(inputFields[0].getText());
+        tempNode.SetFirstName(inputFields[1].getText());
+        tempNode.SetLastNameBirth(inputFields[2].getText());
+        tempNode.SetLastNameMarraige(inputFields[3].getText());
+        tempNode.SetPersonGender(inputFields[4].getText());
+        tempNode.GetPersonAddress().street = inputFields[5].getText();
+        tempNode.GetPersonAddress().country = inputFields[6].getText();
+        tempNode.GetPersonAddress().state = inputFields[7].getText();
+        tempNode.GetPersonAddress().postcode = Integer.parseInt(inputFields[8].getText());
+        tempNode.SetPersonBlurb(inputFields[9].getText());
+        tempNode.SetParentOne(inputFields[10].getText());
+        tempNode.SetParentTwo(inputFields[11].getText());
+        tempNode.SetPersonSpouse(inputFields[12].getText());
+        
+        
     }
-    
-    
     
 }

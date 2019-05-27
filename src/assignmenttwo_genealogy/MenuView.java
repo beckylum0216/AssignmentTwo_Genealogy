@@ -69,6 +69,7 @@ public class MenuView extends Application implements EventHandler<ActionEvent> {
         {
             menuButtons[ii] = new Button(bText[ii]);
             menuButtons[ii].setId(bText[ii]);
+            menuButtons[ii].setMinHeight(100);
             menuButtons[ii].setMaxWidth(Double.MAX_VALUE);
             menuButtons[ii].setOnAction(click->handle(click));
             vMenu.getChildren().add(menuButtons[ii]);

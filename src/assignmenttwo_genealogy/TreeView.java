@@ -51,10 +51,10 @@ public class TreeView {
         {
             if(!this.activeView.get(ii).GetNodeID().equals("root001"))
             {
-                this.activeView.get(ii).GetLeafView().layoutXProperty()
-                                .bind(newPane.widthProperty()
-                                .subtract(this.activeView.get(ii)
-                                .GetLeafView().widthProperty()).divide(2));
+//                this.activeView.get(ii).GetLeafView().layoutXProperty()
+//                                .bind(newPane.widthProperty()
+//                                .subtract(this.activeView.get(ii)
+//                                .GetLeafView().widthProperty()).divide(2));
 
                 this.activeView.get(ii).GetLeafView().setTranslateX((double)this.activeView.get(ii).GetLeafPosition().GetX() * (labelWidth + labelMargin));
                 this.activeView.get(ii).GetLeafView().setTranslateY((double)this.activeView.get(ii).GetLeafPosition().GetY() * (labelHeight + labelMargin));
