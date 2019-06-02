@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import static junit.framework.Assert.assertEquals;
 import org.junit.After;
@@ -32,7 +33,8 @@ public class EditViewTest extends ApplicationTest {
     @Override
     public void start(Stage stage) throws Exception 
     {
-        EditView editPane = new EditView();
+        StackPane testPane = new StackPane();
+        EditView editPane = new EditView(testPane);
         GridPane newPane = editPane.SetEditPane();
         
         Scene newScene = new Scene(newPane, 100,100);

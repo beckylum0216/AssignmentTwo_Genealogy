@@ -31,6 +31,11 @@ public class TreeViewTest extends ApplicationTest{
     @Override
     public void start(Stage stage) throws Exception 
     {
+        Nodi testNode = new Nodi();
+        testNode.SetPersonID("blah001");
+        testNode.SetParentOne("root001");
+        ApplicationController.GetNewInstance().GetTreeDB().AddNode(testNode);
+        
         TreeView testView = new TreeView();
         
         Pane newPane = testView.SetTreePane();

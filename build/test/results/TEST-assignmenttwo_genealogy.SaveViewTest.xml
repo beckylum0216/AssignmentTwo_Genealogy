@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="MSI" name="assignmenttwo_genealogy.SaveViewTest" skipped="0" tests="2" time="2.484" timestamp="2019-06-02T17:24:45">
+<testsuite errors="0" failures="0" hostname="MSI" name="assignmenttwo_genealogy.SaveViewTest" skipped="0" tests="2" time="2.516" timestamp="2019-06-02T21:55:31">
   <properties>
     <property name="netbeans.autoupdate.country" value="AU" />
     <property name="javafx.binarycss" value="false" />
@@ -46,7 +46,7 @@
     <property name="libs.eclipselink.src" value="" />
     <property name="user.name" value="becky" />
     <property name="copylibs.rebase" value="true" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner assignmenttwo_genealogy.SaveViewTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,D:\Murdoch\ICT373\AssignmentTwo_Genealogy\build\test\results\TEST-assignmenttwo_genealogy.SaveViewTest.xml crashfile=D:\Murdoch\ICT373\AssignmentTwo_Genealogy\build\junitvmwatcher5947666115223576983.properties propsfile=D:\Murdoch\ICT373\AssignmentTwo_Genealogy\build\junit5359182372134741170.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner assignmenttwo_genealogy.SaveViewTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,D:\Murdoch\ICT373\AssignmentTwo_Genealogy\build\test\results\TEST-assignmenttwo_genealogy.SaveViewTest.xml crashfile=D:\Murdoch\ICT373\AssignmentTwo_Genealogy\build\junitvmwatcher1102815955564999765.properties propsfile=D:\Murdoch\ICT373\AssignmentTwo_Genealogy\build\junit4847529626788877944.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="build.sysclasspath" value="ignore" />
     <property name="manifest.encoding" value="UTF-8" />
@@ -186,7 +186,6 @@
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM" />
     <property name="javafx.preloader.jar.filename" value="" />
     <property name="netbeans.user" value="C:\Users\becky\AppData\Roaming\NetBeans\10.0" />
-    <property name="tests.failed" value="true" />
     <property name="javadoc.additionalparam" value="" />
     <property name="java.io.tmpdir" value="C:\Users\becky\AppData\Local\Temp\" />
     <property name="javafx.run.inbrowser.path" value="C:\Program Files\Internet Explorer\IEXPLORE.EXE" />
@@ -346,8 +345,8 @@
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
     <property name="javafx.deploy.installpermanently" value="false" />
   </properties>
-  <testcase classname="assignmenttwo_genealogy.SaveViewTest" name="Test003_GridPane" time="1.907" />
-  <testcase classname="assignmenttwo_genealogy.SaveViewTest" name="Test000_ButtonClick" time="0.347" />
+  <testcase classname="assignmenttwo_genealogy.SaveViewTest" name="Test003_GridPane" time="1.98" />
+  <testcase classname="assignmenttwo_genealogy.SaveViewTest" name="Test000_ButtonClick" time="0.331" />
   <system-out><![CDATA[true
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>

@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import static junit.framework.Assert.assertEquals;
 import org.junit.After;
@@ -25,16 +26,20 @@ import org.testfx.framework.junit.ApplicationTest;
  */
 public class LeafViewTest extends ApplicationTest {
     
+    Leaf testLeaf;
     public LeafViewTest() {
     }
     
     @Override
     public void start(Stage stage) throws Exception 
     {
-        Leaf testLeaf = new Leaf();
+        testLeaf = new Leaf();
+        testLeaf.SetNodeID("blah001");
+        testLeaf.SetPrimaryParent("root001");
         LeafView leafPane = new LeafView(testLeaf);
-        leafPane.AddLeafView();
-        Label newPane = leafPane.GetLeafView();
+        Label newLabel = leafPane.GetLeafView();
+        StackPane newPane= new StackPane();
+        newPane.getChildren().add(newLabel);
         Scene newScene = new Scene(newPane, 100,100);
         stage.setScene(newScene);
         stage.show();
@@ -44,8 +49,8 @@ public class LeafViewTest extends ApplicationTest {
     @Test
     public void Test000_LeafLabel()
     {
-        Node testNode = lookup("#LeafLabel").query();
-        assertEquals("LeafLabel", testNode.getId());
+        Node testNode = lookup("#"+testLeaf.GetNodeID()).query();
+        assertEquals(testLeaf.GetNodeID(), testNode.getId());
     }
     
     

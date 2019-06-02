@@ -9,16 +9,23 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 /**
@@ -76,8 +83,11 @@ public class InputView implements EventHandler<ActionEvent>
         for(int ii = 0; ii < numOfFields; ii += 1 )
         {
             Label myLabel = new Label(tempLabels.get(ii));
+            myLabel.setTextAlignment(TextAlignment.RIGHT);
+            //myLabel.setBackground(new Background(new BackgroundFill(Color.web("92E4F0"), CornerRadii.EMPTY, Insets.EMPTY)));
             inputFields[ii] = new TextField(); 
             inputFields[ii].setId(tempLabels.get(ii));
+            //inputFields[ii].prefWidthProperty().bind(newPane.widthProperty().multiply(0.8));
             newPane.add(myLabel, 0, ii);
             newPane.add(inputFields[ii], 1, ii);
         }
@@ -126,7 +136,6 @@ public class InputView implements EventHandler<ActionEvent>
             this.parentPane.getChildren().clear();
             ApplicationView initView = new ApplicationView();
             StackPane tempPane = initView.GetNewPane();
-
             this.parentPane.getChildren().add(tempPane);
         }
         else

@@ -41,6 +41,7 @@ public class LeafView extends Leaf
         this.leafPosition = new Vector2(0f,0f);
         this.modifier = 0;
         this.leafLabel = new Label(inputNode.GetFirstName()+" "+ inputNode.GetLastName());
+        this.leafLabel.setId(this.GetNodeID());
         BackgroundFill nodeFill = new BackgroundFill(Color.web("92E4F0"), CornerRadii.EMPTY, Insets.EMPTY);
         Background nodeBackground = new Background(nodeFill);
         this.leafLabel.setBackground(nodeBackground);
@@ -73,6 +74,7 @@ public class LeafView extends Leaf
     {
         leafLabel = new Label(this.GetFirstName()+" "+ this.GetLastName());
         leafLabel.setId(this.GetNodeID());
+        System.out.println("leaf id:" + this.GetNodeID());
         BackgroundFill nodeFill = new BackgroundFill(Color.web("92E4F0"), CornerRadii.EMPTY, Insets.EMPTY);
         Background nodeBackground = new Background(nodeFill);
         leafLabel.setBackground(nodeBackground);

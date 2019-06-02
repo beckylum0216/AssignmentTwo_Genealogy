@@ -20,7 +20,8 @@ import java.util.TreeSet;
  *
  * @author becky
  */
-public class Graph {
+public class Graph 
+{
     
     
     /**
@@ -148,7 +149,7 @@ public class Graph {
                 this.FindLeftMostSibling();
                 this.FindRightMostSibling();
                 nodeLevel = this.SetModPosition(nodeLevel);
-                //nodeLevel = this.RepositionChildNodes(nodeLevel);
+                nodeLevel = this.RepositionChildNodes(nodeLevel);
                 //nodeLevel = this.SetAdjustedPosition(nodeLevel);
                 
                 for(Leaf indexLeaf:nodeLevel.values())
@@ -177,11 +178,30 @@ public class Graph {
         HashMap<String, Leaf> tempMap = inputMap;
         ArrayList<Leaf> leafList = new ArrayList<Leaf>();
         
-        int count = 0;
-        
         for(Leaf index:tempMap.values())
         {
             System.out.println("Generation: "+ index.GetGeneration()+" Neighbour: "+ index.GetNeighbour() + " mod: "+ index.GetMod());
+            leafList.add(index);
+        }
+        
+        for(Leaf index:tempMap.values())
+        {
+            for(Leaf listIndex:leafList)
+            {
+                if(index.GetNodeID() != listIndex.GetNodeID())
+                {
+                    if(index.GetGeneration() == listIndex.GetGeneration())
+                    {
+                        if(index.GetNeighbour() == listIndex.GetNeighbour())
+                        {
+                            index.SetNeighbour(index.GetNeighbour() + 1);
+                        }
+
+                    }
+                }
+                
+            }
+            
         }
         
         return tempMap;
@@ -345,13 +365,10 @@ public class Graph {
                 }
             }
             
-                
-                
-            
-            
         }
         
         return inputMap;
     }
+    
     
 }

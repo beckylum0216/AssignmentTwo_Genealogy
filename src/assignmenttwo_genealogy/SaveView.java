@@ -115,6 +115,11 @@ public class SaveView implements EventHandler<ActionEvent>{
                 outputFile.close();
 
                 System.out.println("Serialisation run successful!!!");
+                
+                this.parentPane.getChildren().clear();
+                ApplicationView initView = new ApplicationView();
+                StackPane tempPane = initView.GetNewPane();
+                this.parentPane.getChildren().add(tempPane);
 
             }
             catch(Exception e)
@@ -122,11 +127,6 @@ public class SaveView implements EventHandler<ActionEvent>{
                 System.out.println(e);
             }
         }
-        
-        
-        
-        
-        
         
     }
     

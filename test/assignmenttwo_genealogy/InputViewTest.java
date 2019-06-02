@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javax.management.Query;
 import static junit.framework.Assert.assertEquals;
@@ -43,7 +44,8 @@ public class InputViewTest extends ApplicationTest{
     @Override
     public void start(Stage stage) throws Exception 
     {
-        InputView inputPane = new InputView();
+        StackPane testPane = new StackPane();
+        InputView inputPane = new InputView(testPane);
         GridPane newPane = inputPane.SetInputPane();
         Scene newScene = new Scene(newPane, 100,100);
         stage.setScene(newScene);
