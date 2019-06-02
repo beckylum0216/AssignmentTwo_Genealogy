@@ -29,24 +29,37 @@ public class Graph {
      */
     private HashMap<String, LinkedList<Leaf>> adjList;
    
-    
+    /**
+     * <p> Default constructor for the graph  </P>
+     */
     Graph()
     {
         this.adjList = new HashMap<>();
     }
     
     
-    
+    /**
+     * <p> Mutator to set adjacency list </P>
+     * @param inputAdjList stores the familytree graph
+     */
     public void SetAdjList(HashMap<String, LinkedList<Leaf>> inputAdjList)
     {
         this.adjList = inputAdjList;
     }
     
+    /**
+     * <p> Accessor to get adjacency list </P>
+     * @return adjList the adjacency list
+     */
     public HashMap<String, LinkedList<Leaf>> GetAdjList()
     {
         return this.adjList;
     }
     
+    
+    /**
+     * <p> Utility function to print the adjacency list </P>
+     */
     public void PrintAdjList()
     {
         for(LinkedList<Leaf> index:this.adjList.values())
@@ -58,6 +71,11 @@ public class Graph {
         }
     }
     
+    /**
+     * <p>Mutator to the graph adds an edge to the graph database</p>
+     * @param sourceNode the node where the edge originates from 
+     * @param destinationNode the destination where the edge ends
+     */
     public void AddEdge(Nodi sourceNode, Nodi destinationNode)
     {
         Leaf sourceLeaf = new Leaf(sourceNode);
@@ -78,10 +96,11 @@ public class Graph {
     
     /**
      * <p>Setting the generation of each node</p>
-     * @see <a href ="https://www.geeksforgeeks.org/level-node-tree-source-node-using-bfs/">https://www.geeksforgeeks.org/level-node-tree-source-node-using-bfs/</a>
-     * @see https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
-     * @see https://hackernoon.com/graphs-in-cs-and-its-traversal-algorithms-cfee5533f74e
-     * @param root starting node
+     * @see <a href ="https://www.geeksforgeeks.org/level-node-tree-source-node-using-bfs/">bfs</a>
+     * @see<a href ="https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/">bfs</a>
+     * @see <a href="https://hackernoon.com/graphs-in-cs-and-its-traversal-algorithms-cfee5533f74e">bfs</a>
+     * @param firstNode starting node
+     * @return nodeLeaf sets the generation of the node
      */
     public ArrayList<Leaf> BreadthFirstTraversal(Nodi firstNode)
     {
@@ -148,9 +167,10 @@ public class Graph {
     
     /**
      * <p>Setting the generation of each node</p>
-     * @see https://www.geeksforgeeks.org/level-node-tree-source-node-using-bfs/
-     * @see https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
-     * @param root starting node
+     * @see <a href = "https://www.geeksforgeeks.org/level-node-tree-source-node-using-bfs/">level</a>
+     * @see <a href="https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/">bfs</a>
+     * @param inputMap map 
+     * @return tempMap map  with new node positions
      */
     public HashMap<String, Leaf> RepositionChildNodes(HashMap<String, Leaf> inputMap)
     {
@@ -172,7 +192,7 @@ public class Graph {
     
     /**
      * <p>Helper function for finding leaf node</p>
-     * @see https://blacketernal.wordpress.com/2013/06/20/a-c-implementation-of-the-reingold-tilford-tree-layout-algorithm-for-heuristiclab/
+     * @see<a href="https://blacketernal.wordpress.com/2013/06/20/a-c-implementation-of-the-reingold-tilford-tree-layout-algorithm-for-heuristiclab/">reingold</a>
      * @param root starting node
      */
     private void FindLeafNodes()
@@ -204,6 +224,9 @@ public class Graph {
         }   
     }
     
+    /**
+     * <p>Finds the left most siblings in the generation </p>
+     */
     private void FindLeftMostSibling()
     {
         for(LinkedList <Leaf> listIndex:this.adjList.values())
@@ -218,6 +241,9 @@ public class Graph {
         }  
     }
     
+    /**
+     * <p> Finds and sets the right most sibling of the generation </P>
+     */
     private void FindRightMostSibling()
     {
         for(LinkedList <Leaf> listIndex:this.adjList.values())
@@ -227,7 +253,11 @@ public class Graph {
     }
     
     
-    
+    /**
+     * <p>Mutator to set the middle of point of the generation</p>
+     * @param inputMap the graph map
+     * @return inputMap sets the middle position of the parent
+     */
     private HashMap<String, Leaf> SetModPosition(HashMap<String, Leaf> inputMap)
     {
         HashMap <Double, ArrayList<Leaf>> generationSiblings = new HashMap<>();
@@ -276,6 +306,11 @@ public class Graph {
         return inputMap;
     }
     
+    /**
+     * <p>Mutator to adjust the position of the sub trees</p>
+     * @param inputMap the graph map
+     * @return inputMap the adjusted position of the sub trees
+     */
     public HashMap<String, Leaf> SetAdjustedPosition(HashMap<String, Leaf> inputMap)
     {
         ArrayList<Leaf> parentList = new ArrayList<>();

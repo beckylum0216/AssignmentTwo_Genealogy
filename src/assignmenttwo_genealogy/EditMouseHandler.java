@@ -20,13 +20,22 @@ public class EditMouseHandler implements EventHandler<MouseEvent>
     private TextField[] inputFields;
     private Nodi currentRecord;
     
+    
+    /**
+     * <p> constructor for the mouse event handler</P>
+     * @param inputView the list to the ListView
+     * @param targetFields the input fields on the edit form
+     */
     public EditMouseHandler(ListView inputView, TextField[] targetFields)
     {
         this.newList = inputView;
         this.inputFields = targetFields;
     }
     
-    
+    /**
+     * <p> Event Handler specific to the mouse events and set current record</P>
+     * @param mouse event variable for the mouse 
+     */
     @Override
     public void handle(MouseEvent mouse)
     {
@@ -47,6 +56,10 @@ public class EditMouseHandler implements EventHandler<MouseEvent>
         inputFields[12].setText(currentRecord.GetPersonSpouse());
     }
     
+    /**
+     * <p> Accessor to the current record being edited</P>
+     * @return currentRecord 
+     */
     public Nodi GetCurrentRecord()
     {
         return this.currentRecord;

@@ -24,13 +24,18 @@ public class TreeController
    
     private Graph familyTree;
     
-    
+    /**
+     * <p>Default constructor</p>
+     */
     public TreeController()
     {
         
         
     }
     
+    /**
+     * <p> function to populate the graph with nodes and edges</p>
+     */
     private void PopulateFamilyTree()
     {
         ArrayList <Nodi> tempList = new ArrayList<>();
@@ -49,7 +54,10 @@ public class TreeController
         
     }
     
-    
+    /**
+     * <p> Sets the generation of the node</p>
+     * @return 
+     */
     private ArrayList<Leaf> SetPosition()
     {
         Nodi rootNode = ApplicationController.GetNewInstance().GetTreeDB().GetRootNode();
@@ -74,6 +82,10 @@ public class TreeController
         
     }
     
+    /**
+     * <p> Accessor to create a new graph and positions the labels</p>
+     * @return treeList
+     */
     public ArrayList<LeafView> GetTreeList()
     {
         this.familyTree = new Graph();

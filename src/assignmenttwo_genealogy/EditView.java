@@ -10,6 +10,7 @@ import java.util.Map;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -21,6 +22,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -35,17 +37,25 @@ public class EditView implements EventHandler<ActionEvent>
     private int numOfFields = 13;
     private TextField[] inputFields = new TextField[numOfFields];
     private EditMouseHandler mouseHandle;
+    private StackPane parentPane;
     
-    public EditView()
+    /**
+     * <p> Default constructor to the EditView</P> 
+     */
+    public EditView(StackPane inputPane)
     {
-         
+         this.parentPane = inputPane;
     }
-            
+     
+    /**
+     * <p> Mutator for creation of the edit pane</P>
+     * @return newPane the view with the child nodes for the view
+     */
     public GridPane SetEditPane()
     {
         
         GridPane newPane = new GridPane();
-        
+        newPane.setId("EditPane");
         ScrollPane scrollSubPane = new ScrollPane();
         newList = new ListView();
         newList.getItems().addAll(ApplicationController.GetNewInstance().GetTreeDB().GetFamilyTree().keySet());
@@ -53,9 +63,6 @@ public class EditView implements EventHandler<ActionEvent>
         scrollSubPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollSubPane.setFitToHeight(true);
         scrollSubPane.setFitToWidth(true);
-        
-        
-        
         newPane.add(scrollSubPane, 0, 0, 1,15);
         
         newPane.setHgap(10);
@@ -79,8 +86,8 @@ public class EditView implements EventHandler<ActionEvent>
         tempLabels.add("State:");
         tempLabels.add("Postcode:");
         tempLabels.add("Blurb:");
-        tempLabels.add("Parent 1:");
-        tempLabels.add("Parent 2:");
+        tempLabels.add("Primary Parent:");
+        tempLabels.add("Other Parent:");
         tempLabels.add("Spouse:");
         
         for(int ii = 0; ii < numOfFields; ii += 1 )
@@ -94,8 +101,8 @@ public class EditView implements EventHandler<ActionEvent>
         mouseHandle = new EditMouseHandler(this.newList, this.inputFields);
         newList.setOnMouseClicked(click ->mouseHandle.handle(click));
         
-        
         Button editButton = new Button("Edit");
+        editButton.setId("editButton");
         editButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         
         editButton.setOnAction(click ->handle(click));
@@ -123,6 +130,11 @@ public class EditView implements EventHandler<ActionEvent>
         return newPane;
     }
     
+    
+    /**
+     * <p> Event Handler for the edit button. </P>
+     * @param event buttons event
+     */
     @Override
     public void handle(ActionEvent event) {
         
@@ -142,7 +154,16 @@ public class EditView implements EventHandler<ActionEvent>
         tempNode.SetParentTwo(inputFields[11].getText());
         tempNode.SetPersonSpouse(inputFields[12].getText());
         
+        Alert inputAlert = new Alert(Alert.AlertType.INFORMATION);
+        inputAlert.setTitle("Input Confirmation");
+        inputAlert.setContentText("Your record has been saved. Press edit to edit another record");
+        inputAlert.show();
         
+        this.parentPane.getChildren().clear();
+        ApplicationView initView = new ApplicationView();
+        StackPane tempPane = initView.GetNewPane();
+        
+        this.parentPane.getChildren().add(tempPane);
     }
     
 }

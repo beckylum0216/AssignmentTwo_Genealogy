@@ -15,6 +15,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -33,17 +34,26 @@ public class MenuView extends Application implements EventHandler<ActionEvent> {
     String[] bText = {"New", "Load", "Save", "Edit", "View"};
     Button[] menuButtons = new Button[bText.length];
     Scene menuScene;
-   
+    StackPane initPane;
     
+    /**
+     * <p>javafx function for initialising the gui loop </p>
+     */
     @Override
     public void init()
     {
         this.subPane = new StackPane();
+        this.subPane.setId("menuSubPane");
+        
         this.newPane = new GridPane();
+        this.newPane.setId("menuNewPane");
         this.menuScene = new Scene(newPane, 1280, 1024);
     }
     
-    //https://stackoverflow.com/questions/30679025/graph-visualisation-like-yfiles-in-javafx
+    /**
+     * <p> javafx start function</p>
+     * @param inputStage initial stage
+     */
     @Override
     public void start(Stage inputStage)
     {
@@ -57,9 +67,14 @@ public class MenuView extends Application implements EventHandler<ActionEvent> {
        
     }
     
+    /**
+     * <p>Menu subpanel</p>
+     * @return vMenu the initial menu
+     */
     private VBox SetVBox()
     {
         VBox vMenu = new VBox();
+        vMenu.setId("vMenu");
         Insets newInset = new Insets(10,10,10,10);
         vMenu.setSpacing(10);
         vMenu.setAlignment(Pos.TOP_CENTER);
@@ -82,22 +97,43 @@ public class MenuView extends Application implements EventHandler<ActionEvent> {
         
     }
     
-    
+    /**
+     * <p>Gripane to set the menu and sub panes </p>
+     */
     private void SetGridPane()
     {
         VBox newVBox = SetVBox();
         
         this.newPane.add(newVBox, 0,0);
         
+        ApplicationView initView = new ApplicationView();
+        initPane = initView.GetNewPane();
+        this.subPane.getChildren().add(initPane);
+        subPane.prefWidthProperty().bind(this.menuScene.widthProperty().multiply(0.6));
+        this.newPane.add(this.subPane, 1, 0);
+        
     }
     
+    /**
+     * <p>Accessor for menuScene</p>
+     * @return menuScene the menu's scene
+     */
+    public Scene GetScene()
+    {
+        return menuScene;
+    }
+    
+    /**
+     * <p>Event Handler for the menu buttons</p>
+     * @param event menu button even handler
+     */
     @Override
     public void handle(ActionEvent event) 
     {
         Button inputButton = (Button) event.getSource();
         if (inputButton.getId().equals(menuButtons[0].getId()))
         {
-            InputView inputForm = new InputView();
+            InputView inputForm = new InputView(this.subPane);
             newPane.getChildren().remove(subPane);
             subPane.getChildren().clear();
             subPane.getChildren().add(inputForm.SetInputPane());
@@ -136,7 +172,7 @@ public class MenuView extends Application implements EventHandler<ActionEvent> {
         }
         else if(inputButton.getId().equals(menuButtons[3].getId()))
         {
-            EditView editForm = new EditView();
+            EditView editForm = new EditView(this.subPane);
             newPane.getChildren().remove(subPane);
             subPane.getChildren().clear();
             subPane.getChildren().add(editForm.SetEditPane());

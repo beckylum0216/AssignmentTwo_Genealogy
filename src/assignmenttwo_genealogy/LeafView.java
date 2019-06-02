@@ -31,6 +31,10 @@ public class LeafView extends Leaf
     private Boolean IsLeaf;
     Label leafLabel;
     
+    /**
+     * <p>parameterised constructor for leaf view</p>
+     * @param inputNode 
+     */
     LeafView(Leaf inputNode)
     {
         super(inputNode);
@@ -44,24 +48,40 @@ public class LeafView extends Leaf
         this.leafLabel.setMinHeight(25);
     }
     
+    /**
+     * <p>Mutator to set node position </p>
+     * @param inputPosition calculated leaf position
+     */
     public void SetLeafPosition(Vector2 inputPosition)
     {
         this.leafPosition = inputPosition;
     }
     
+    /**
+     * <p>Accessor to get node position</p>
+     * @return leafPosition the leaf position
+     */
     public Vector2 GetLeafPosition()
     {
         return this.leafPosition;
     }
     
+    /**
+     * <p>Adds a new label as a representation of a leaf </p>
+     */
     public void AddLeafView()
     {
         leafLabel = new Label(this.GetFirstName()+" "+ this.GetLastName());
+        leafLabel.setId(this.GetNodeID());
         BackgroundFill nodeFill = new BackgroundFill(Color.web("92E4F0"), CornerRadii.EMPTY, Insets.EMPTY);
         Background nodeBackground = new Background(nodeFill);
         leafLabel.setBackground(nodeBackground);
     }
     
+    /**
+     * <p>Accessor to get leaf label</p>
+     * @return leafLabel the leaf label
+     */
     public Label GetLeafView()
     {
         return leafLabel;
